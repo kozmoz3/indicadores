@@ -1,0 +1,22 @@
+<div class="col-lg-5">
+	<div class="form-group">
+		<label for="sel1">Sector</label> 
+		<select th:field="*{sector}" class="form-control" id="sel1">
+			<option th:each="i : ${sector}" th:value="${i}" th:text="${i}" ></option>
+			
+		</select>
+	</div>
+</div>
+<div class="col-lg-5">
+	<div class="form-group">
+		<label for="sel1">Periodo</label>
+		 <input class="form-control" id="date-pickers" th:field="*{periodo}"/>
+	</div>
+</div>
+<div class="col-lg-2">
+	<div class="form-group">
+		<label for="sel1"></label>
+	<button type="submit" class="btn btn-default form-control">Actualizar Indicadores</button>
+	</div>
+</div>
+

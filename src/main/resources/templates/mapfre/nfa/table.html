@@ -1,0 +1,16 @@
+<table id="example2" class="table table-striped">
+	<thead>
+		<tr>
+			<th>SECTOR</th>
+			<th>#FOLIO</th>
+			<th>DETALLE</th>
+		</tr>
+	</thead>
+	<tbody >
+		<tr id="table" th:each="nfa: ${chartNfa}" >
+			<td th:text="${nfa.name}"></td>
+           <td th:text="${nfa.data[0]}"></td>
+			<td><form class="detalleNFA"  th:object="${detallemodel}" method="post"> <div th:replace="mapfre/nfa/detalle"></div></form></td>
+		</tr>
+	</tbody>
+</table>

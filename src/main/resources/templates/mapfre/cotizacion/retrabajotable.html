@@ -1,0 +1,23 @@
+<div class="col-lg-4" style="position: relative; height: 500px;">
+<table id="tbl-retrabajo" class="table table-striped">
+	<thead>
+		<tr>
+			<th>RETRABAJO</th>
+			<th># FOLIOS</th>
+			<th>SECTOR</th>
+            <th>AGENTE</th>
+		</tr>
+	</thead>
+	<tbody >
+		<tr id="tableS" th:each="retrabajo: ${tableRetrabajo}" >
+			<td class="es"  th:text="${retrabajo.recotizacion}" ></td>
+			<td class="ese" th:text="${retrabajo.folios}" ></td>
+			<td ><form class="retrabajosector"  th:object="${detallemodel}" method="post"> <div th:replace="mapfre/cotizacion/retrabajografica"></div></form></td>
+			<td ><form class="retrabajoagente"  th:object="${detallemodel}" method="post"> <div th:replace="mapfre/cotizacion/retrabajografica"></div></form></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<div class="col-lg-8"  style="position: relative; height: 500px;">
+<div id="retrabajo_grafica" ></div>
+</div>

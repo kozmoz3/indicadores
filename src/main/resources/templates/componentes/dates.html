@@ -1,0 +1,56 @@
+
+<div class="box box-primary">
+	<div class="box-header">
+		<h3 class="box-title">Date</h3>
+	</div>
+	<div class="box-body">
+		<!-- Date -->
+		<div class="col-md-6">
+			<div class="form-group">
+				<label>Fecha Inicio:</label>
+
+				<div class="input-group date">
+					<div class="input-group-addon">
+						<i class="fa fa-calendar"></i>
+					</div>
+					<input name ="datepicker" type="text" class="form-control pull-right" id="datepicker" data-date-format="dd/mm/yy"  th:field="*{dateStart}" required="true" pattern="^([0-2][0-9]|3[0-1])(/)(0[1-9]|1[0-2])(/)(\d{2})" placeholder="dd/mm/yy"></input>
+				   <p th:if="${#fields.hasErrors('dateStart')}" th:errors="*{dateStart}">date Error</p>
+				</div>
+				<!-- /.input group -->
+			</div>
+		</div>
+		<!-- /.form group -->
+		<!-- Date -->
+		<div class="col-md-6">
+			<div class="form-group">
+				<label>Fecha  Final:</label>
+
+				<div class="input-group date">
+					<div class="input-group-addon">
+						<i class="fa fa-calendar"></i>
+					</div>
+					<input name ="datepicker2" type="text" class="form-control pull-right" id="datepicker2" data-date-format="dd/mm/yy"  th:field="*{dateFinish}" required="true" pattern="^([0-2][0-9]|3[0-1])(/)(0[1-9]|1[0-2])(/)(\d{2})"  placeholder="dd/mm/yy"></input>
+				  <p th:if="${#fields.hasErrors('dateFinish')}" th:errors="*{dateFinish}">date Error</p>
+				</div>
+				<!-- /.input group -->
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="form-group">
+				<div class="input-group date">
+					<button id="buscar" type="submit" class="btn btn-danger"><i class="fa fa-search-plus"></i><br></br>BUSCAR</button>
+				</div>
+				<!-- /.input group -->
+			</div>
+		</div>
+
+		<!-- /.form group -->
+
+	</div>
+	<!-- /.box-body -->
+
+</div>
+
+
+

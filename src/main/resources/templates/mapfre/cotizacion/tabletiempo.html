@@ -1,0 +1,33 @@
+<div class="col-lg-6">
+<table id="proceso" class="table table-striped">
+	<thead>
+		<tr>
+			<th>PROCESOS</th>
+			<th>DIAS</th>
+		</tr>
+	</thead>
+	<tbody >
+		<tr>
+		<td>COTIZACION</td>
+		<td th:text="${tableProceso}"></td>	
+		</tr>
+	</tbody>
+</table>
+</div>
+<div class="col-lg-6">
+<table id="proceso" class="table table-striped">
+	<thead>
+		<tr>
+			<th>AREA</th>
+			<th>DIAS</th>
+		</tr>
+	</thead>
+	<tbody >
+		<tr id="table" th:each="tblarea: ${tableArea}" >
+			<td th:text="${tblarea.area}"> </td>
+			<td th:text="${tblarea.dias}"></td>
+		</tr>
+             
+	</tbody>
+</table>
+</div>

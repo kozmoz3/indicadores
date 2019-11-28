@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="adminlte/head"></div>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		<!-- HEADERS -->
+		<div th:replace="adminlte/header"></div>
+		<!-- Left MENU side column. contains the logo and sidebar -->
+		<div th:replace="adminlte/menu"></div>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<div th:replace="adminlte/headerWrapper"></div>
+			<!-- Main content -->
+			<section class="content">
+				<!-- Small boxes (Stat box) -->
+				<div class="row">
+					<!-- ./col -->
+				</div>
+				<!-- /.row -->
+				<!-- Main row -->
+				<div class="row">
+					<!-- Left col -->
+					<section class="col-lg-12 connectedSortable">
+						<!-- Custom tabs (Charts with tabs)-->
+						<div class="nav-tabs-custom">
+							<!-- Tabs within a box -->
+							<div th:replace="adminlte/nav-tabswrapper"></div>
+							<div class="tab-content no-padding">
+								
+						<div class="" id="grafica" style="position: relative; height: 500px;"></div>
+								
+									</div>
+						</div>
+					</section>
+					<!-- /.Left col -->
+					<!-- right col (We are only adding the ID to make the widgets sortable)-->
+					<!-- right col -->
+				</div>
+				<!-- /.row (main row) -->
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<!-- /.FOOTER -->
+		<div th:replace="adminlte/footer"></div>
+	</div>
+	<!-- ./wrapper -->
+	<div th:replace="adminlte/script"></div>
+
+	<script th:inline="javascript">
+	
+/*<![CDATA[*/
+    var grafica = /*[[${grafica}]]*/ 'Sebastian';  
+/*]]>*/
+		console.log('graficas ',grafica.data)
+		$(function($) {
+			
+			$('#contenido').show();
+			
+			$('#grafica').highcharts({
+		    	chart : {type : 'bar',options3d : {enabled : true,alpha : 45,beta : 0}},
+				title : {text : 'Tiempo Promedio de Emisión en Minutos'},
+				xAxis: {
+		            categories: grafica.categoria
+		        },
+		        yAxis: {
+		            title: {
+		                text: 'Sectores'
+		            }
+		        },
+				tooltip : {pointFormat : '{series.name}:'},
+										series : [ {
+											name : '',
+											data : grafica.data
+										} ]
+
+									});/*highcharts*/
+												
+			//
+	
+			});
+
+	</script>
+<script th:src="@{cotizacion/cotizacion.js}"></script>
+<script th:src="@{cotizacion/validDate.js}"></script>
+
+
+</body>
+</html>

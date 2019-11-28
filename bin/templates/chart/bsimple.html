@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:replace="adminlte/head"></div>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+   <!-- HEADERS -->
+   <div th:replace="adminlte/header"></div>
+ <!-- Left MENU side column. contains the logo and sidebar -->
+  <div th:replace="adminlte/menu"></div>
+  <!-- Content Wrapper. Contains page content -->
+   <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div th:replace="adminlte/headerWrapper"></div>
+    <!-- Main content -->
+    <section class="content">
+      <!-- Small boxes (Stat box) -->
+      <div class="row">  
+        <!-- ./col -->
+      </div>
+      <!-- /.row -->
+      <!-- Main row -->
+      <div class="row">  
+        <!-- Left col -->
+        <section class="col-lg-12 connectedSortable">
+          <!-- Custom tabs (Charts with tabs)-->
+          <div class="nav-tabs-custom">
+            <!-- Tabs within a box -->
+            <div th:replace="adminlte/nav-tabswrapper"></div>
+              <div class="tab-content no-padding">
+              <!-- content del panel dasboard Morris chart - Sales -->
+            <div id="grafica" style="position: relative; height: 500px;"></div>
+            </div>  
+          </div>
+        </section>
+        <!-- /.Left col -->
+        <!-- right col (We are only adding the ID to make the widgets sortable)-->
+        <!-- right col -->
+      </div>
+      <!-- /.row (main row) -->
+    </section>
+    <!-- /.content -->
+  </div>
+<!-- /.content-wrapper -->
+  <!-- /.FOOTER -->
+  <div th:replace="adminlte/footer"></div>
+</div>
+<!-- ./wrapper -->
+ <div th:replace="adminlte/script"></div>
+
+  <script>
+  $(function($){
+      $('#grafica').highcharts({
+          title:{text:'Grafiaca de  Barras simple'},
+          xAxis:{categories:['2017','2018','2019']},
+          yAxis:{title:'Porcentaje %',plotLines:[{value:0,width:1,color:'#808080'}]},
+          tooltip:{valueSuffix:'%'},
+          legend:{layout:'vertical',align:'right',verticalAlign:'middle',borderWidth:0},
+          series:[{type: 'column',name: 'Daños',data: [25,23, 21]}, 
+          
+        ],
+          plotOptions:{line:{dataLabels:{enabled:true}}}
+      });
+  });
+ </script>
+
+ 
+</body>
+</html>
+
+
+
+ 
+

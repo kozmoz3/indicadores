@@ -1,0 +1,55 @@
+<div class="col-lg-4">
+<table id="proceso" class="table table-striped">
+	<thead>
+		<tr>
+			<th>Motivo de Cancelacion</th>
+			<th># Folios</th>
+			<th>%</th>
+		</tr>
+	</thead>
+	<tbody >
+		<tr th:each="motivo: ${tableMotivo}">
+		<td th:text="${motivo.estatus}"></td>
+		<td th:text="${motivo.numFolios}"></td>	
+		<td th:text="${motivo.porcentaje}+'%'"></td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<div class="col-lg-4">
+<table id="proceso" class="table table-striped">
+	<thead>
+		<tr>
+			<th>Motivo de rechazo</th>
+			<th># Folios</th>
+			<th>%</th>
+		</tr>
+	</thead>
+	<tbody >
+		<tr th:each="rechazo: ${tableCancelacion}">
+		<td th:text="${rechazo.estatus}"></td>
+		<td th:text="${rechazo.numFolios}"></td>	
+		<td th:text="${rechazo.porcentaje}+'%'"></td>
+        </tr>     
+	</tbody>
+</table>
+</div>
+<div class="col-lg-4">
+<table id="proceso" class="table table-striped">
+	<thead>
+		<tr>
+			<th>Motivo de NO Aceptado</th>
+			<th># Folios</th>
+			<th>%</th>
+		</tr>
+	</thead>
+	<tbody >
+		<tr id="table" th:each="tblnoaceptacion: ${tableNOAceptacion}" >
+			<td th:text="${tblnoaceptacion.estatus}"> </td>
+			<td th:text="${tblnoaceptacion.numFolios}"></td>
+			<td th:text="${tblnoaceptacion.porcentaje}+'%'"></td>
+		</tr>
+             
+	</tbody>
+</table>
+</div>

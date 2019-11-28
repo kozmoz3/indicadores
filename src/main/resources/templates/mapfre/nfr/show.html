@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:replace="adminlte/head"></div>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		<!-- HEADERS -->
+		<div th:replace="adminlte/header"></div>
+		<!-- Left MENU side column. contains the logo and sidebar -->
+		<div th:replace="adminlte/menu"></div>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<div th:replace="adminlte/headerWrapper"></div>
+			<!-- Main content -->
+			<section class="content">
+				<!-- Small boxes (Stat box) -->
+				<div class="row">
+					<!-- ./col -->
+				</div>
+				<!-- /.row -->
+				<!-- Main row -->
+				<div class="row">
+					<!-- Left col -->
+					<section class="col-lg-12 connectedSortable">
+						<!-- Custom tabs (Charts with tabs)-->
+						<div class="nav-tabs-custom">
+							<!-- Tabs within a box -->
+							<div th:replace="adminlte/nav-tabswrapper"></div>
+							<div class="tab-content no-padding">
+							<div class="alert alert-info" role="alert">
+									<span class="glyphicon glyphicon-stats"
+										aria-hidden="true"></span> <span class="sr-only">Grafica</span>
+									Grafica de Numero de folios recibidos
+								</div>
+							<form id="yourForm" th:action="@{/indicador_nfr_show}"
+									th:object="${datesmodel}" method="post">
+								<div th:replace="componentes/dates"></div>
+								</form>
+								
+								<br></br>
+								<div id="contenido">
+								<form  th:action="@{/download/nfr.pdf}"
+									th:object="${datesmodel}" method="post">
+								<div th:replace="componentes/dateshidden"></div>
+								</form>
+								<div id="div-grafica">
+									<div class="col-lg-12"
+										style="position: relative; background-color: white; min-height: 500px;">
+									<div id="grafica" ></div>
+									</div>
+									</div><!-- div-grafica -->
+									
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- /.Left col -->
+					<!-- right col (We are only adding the ID to make the widgets sortable)-->
+					<!-- right col -->
+				</div>
+				<!-- /.row (main row) -->
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<!-- /.FOOTER -->
+		<div th:replace="adminlte/footer"></div>
+	</div>
+	<!-- ./wrapper -->
+	<div th:replace="adminlte/script"></div>
+
+	<script th:inline="javascript">
+	
+/*<![CDATA[*/
+    var data = /*[[${dataCotizacion}]]*/ 'Sebastian';  
+/*]]>*/
+		console.log('graficas ',data[0].name)
+		var categoria = [];
+		var datos = []; 
+		for (var clave in data){
+			categoria.push(data[clave].name)
+			datos.push(data[clave].data)
+			console.log("La clave es " + clave+ " y el valor es " + data[clave].name)
+		}
+		console.log('categorias',categoria)
+		console.log('datos',datos)
+		$(function($) {
+			
+			$('#contenido').show();
+			
+		
+		 $('#grafica').highcharts({
+					    	chart : {type : 'bar',options3d : {enabled : true,alpha : 45,beta : 0}},
+							title : {text : 'Numero de Folios Recibidos'},
+							xAxis: {
+					            categories: categoria
+					        },
+					        yAxis: {
+					            title: {
+					                text: 'Sectores'
+					            }
+					        },
+							tooltip : {pointFormat : '{series.name}:'/* <b>{point.percentage:.1f}%</b>*/},
+							/*plotOptions : {pie : {allowPointSelect : true,
+								        cursor : 'pointer',
+								         depth : 35,
+								     dataLabels : {enabled : true,format : '{point.name}'
+															}}},*/
+													series : [ 
+														{
+												            name: '',
+												            data: datos
+												        } 
+														]
+
+												});/*highcharts*/
+			//
+	
+			});
+
+	</script>
+<script th:src="@{cotizacion/cotizacion.js}"></script>
+<script th:src="@{cotizacion/validDate.js}"></script>
+
+
+</body>
+</html>

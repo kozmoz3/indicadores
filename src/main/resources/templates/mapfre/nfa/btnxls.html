@@ -1,0 +1,17 @@
+
+
+<div class="panel panel-primarys">
+	<div class="panel-body">
+		<div class="btn-groups" role="group" aria-label="...">
+			<button type="button" class="btn btn-default" id="btn-grafica">Numero Folios</button>
+		<form th:action="@{/download/foliosAtendidos.xlsx}" th:object="${datesmodel}" th:method="post">
+				<input type="text" th:field="*{dateStart}" id="dateFirst"
+					style="display: none;"></input> <input type="text"
+					th:field="*{dateFinish}" id="dateSecond" style="display: none;"></input>
+				<button type="submit" class="btn btn-default">Exportar</button>
+									   </form>
+			
+		</div>
+	</div>
+	<div class="panel-footer"></div>
+</div>

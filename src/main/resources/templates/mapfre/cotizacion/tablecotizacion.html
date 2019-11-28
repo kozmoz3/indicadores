@@ -1,0 +1,28 @@
+
+<table id="example2" class="table table-striped">
+	<thead>
+		<tr>
+			<th>ESTATUS</th>
+			<th># FOLIOS</th>
+			<th>% FOLIOS</th>
+            <th>SECTOR</th>
+            <th>AGENTE</th>
+		</tr>
+	</thead>
+	<tbody >
+		<tr id="table" th:each="cotizacion: ${tableCotizacion}" >
+			<td class="es" th:text="${cotizacion.estatus}">
+			
+           </td>
+			<td class="ese" th:text="${cotizacion.numFolios}">PENDIENTE</td>
+			<td th:text="${cotizacion.porcentaje}+'%'">PENDIENTE</td>
+            <td>
+            <form class="sector1"  th:object="${detallemodel}" method="post"> <div th:replace="mapfre/cotizacion/form_detalle"></div></form>
+            </td>
+            <td>
+            <form class="agente1"  th:object="${detallemodel}" method="post"> <div th:replace="mapfre/cotizacion/form_detalle"></div></form>
+            </td>
+		</tr>
+
+	</tbody>
+</table>

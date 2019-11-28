@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:replace="adminlte/head"></div>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		<!-- HEADERS -->
+		<div th:replace="adminlte/header"></div>
+		<!-- Left MENU side column. contains the logo and sidebar -->
+		<div th:replace="adminlte/menu"></div>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<div th:replace="adminlte/headerWrapper"></div>
+			<!-- Main content -->
+			<section class="content">
+				<!-- Small boxes (Stat box) -->
+				<div class="row">
+					<!-- ./col -->
+				</div>
+				<!-- /.row -->
+				<!-- Main row -->
+				<div class="row">
+					<!-- Left col -->
+					<section class="col-lg-12 connectedSortable">
+						<!-- Custom tabs (Charts with tabs)-->
+						<div class="nav-tabs-custom">
+							<!-- Tabs within a box -->
+							<div th:replace="adminlte/nav-tabswrapper"></div>
+							<div class="tab-content no-padding">
+							<form id="yourForm" th:object="${datesmodel}" method="post">
+								<div th:replace="componentes/dates"></div>
+								</form>
+								<div id="contenido">
+									<!-- content del panel dasboard Morris chart - Sales -->
+									<div class="col-lg-4"
+										style="position: relative; background-color: white; min-height: 500px;">
+
+										<div th:replace="mapfre/cotizacion/tablecotizacion"
+											style="background-color: #00FF00 !important; position: relative; height: 500px;"></div>
+									</div>
+									<div class="col-lg-7" id="grafica" style="position: relative; height: 500px;"></div>
+									<div class="col-lg-1" style="position: relative; height: 500px; background-color: white !important;"> 
+										<form th:action="@{/download/customers.xlsx}" th:object="${datesmodel}" th:method="post">
+										<input type="text" th:field="*{dateStart}" id="dateFirst" style="display:none;"></input>
+										<input type="text" th:field="*{dateFinish}" id="dateSecond" style="display:none;"></input>
+										<button type="submit" class="btn btn-primary">Exportar</button>
+									   </form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- /.Left col -->
+					<!-- right col (We are only adding the ID to make the widgets sortable)-->
+					<!-- right col -->
+				</div>
+				<!-- /.row (main row) -->
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<!-- /.FOOTER -->
+		<div th:replace="adminlte/footer"></div>
+	</div>
+	<!-- ./wrapper -->
+	<div th:replace="adminlte/script"></div>
+
+	<script>
+	
+		$(function($) {
+				
+			$('#datepicker').datepicker({
+				autoclose : true,
+				dateFormat: "dd/mm/yy"
+			})
+			$('#datepicker2').datepicker({
+				autoclose : true,
+				dateFormat: "dd/mm/yy"
+			})
+			$('#contenido').hide();
+
+			$('#yourForm').submit(function(e) {
+				 e.preventDefault();
+				var fechaInicial = $('#datepicker').val();
+				var fechaFinal = $('#datepicker2').val();
+				
+				if (fechaInicial > fechaFinal) {
+					alert('la fecha inicial debe ser menor a la fecha final')
+				} else if (fechaInicial == '' || fechaFinal == '') {
+					alert('la fecha no debe estar vacia')
+				}else{
+					$('#contenido').show();
+					$('#dateFirst').val(fechaInicial);
+					$('#dateSecond').val(fechaFinal);
+			
+					var posting = $.post("/chartByDateStarts",$(this).serialize() );/*post fin*/
+					var postTable = $.post("/chartByDateStarts2",$(this).serialize() );
+					
+					
+					postTable.done(function( data ) {
+						 $.each(data, function(i, datos) {
+						    	var newRow =
+				                    "<tr>" +
+				                    "<td>" + datos.estatus + "</td>" +
+				                    "<td>" + datos.numFolios+ "</td>" +
+				                    "<td>" + datos.porcentaje + "%</td>" +
+				                    "</tr>";
+						    	$(newRow).appendTo("#example2 tbody");
+						    });
+					});
+					
+					posting.done(function( data ) {
+	
+					    $('#grafica').highcharts({
+					    	chart : {type : 'pie',options3d : {enabled : true,alpha : 45,beta : 0}},
+							title : {text : 'Grafica Folios por Status'},
+							tooltip : {pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'},
+							plotOptions : {pie : {allowPointSelect : true,cursor : 'pointer',depth : 35,dataLabels : {enabled : true,format : '{point.name}'
+															}}},
+													series : [ {
+														type : 'pie',
+														name : 'cotizacion',
+														data : data
+
+													} ]
+
+												});/*highcharts*/
+					  });
+					
+					//postAjax();
+					/*fin posting*/
+				}
+				});
+			/*search btn*/
+			
+				
+			});
+
+	</script>
+
+
+</body>
+</html>

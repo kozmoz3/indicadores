@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<div th:replace="adminlte/head"></div>
+<body class="hold-transition skin-blue sidebar-mini">
+	<div class="wrapper">
+		<!-- HEADERS -->
+		<div th:replace="adminlte/header"></div>
+		<!-- Left MENU side column. contains the logo and sidebar -->
+		<div th:replace="adminlte/menu"></div>
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<div th:replace="adminlte/headerWrapper"></div>
+			<!-- Main content -->
+			<section class="content">
+				<!-- Small boxes (Stat box) -->
+				<div class="row">
+					<!-- ./col -->
+				</div>
+				<!-- /.row -->
+				<!-- Main row -->
+				<div class="row">
+					<!-- Left col -->
+					<section class="col-lg-12 connectedSortable">
+						<!-- Custom tabs (Charts with tabs)-->
+						<div class="nav-tabs-custom">
+							<!-- Tabs within a box -->
+							<div th:replace="adminlte/nav-tabswrapper"></div>
+							<div class="tab-content no-padding">
+								<div class="panel panel-primarys">
+									<div class="panel-body">
+										<div class="btn-group" role="group" aria-label="...">
+											<button type="button" class="btn btn-default"
+												id="btn-dev">DEVOLUCION</button>
+											<button type="button" class="btn btn-default"
+												id="btn-rechazos">RECHAZOS</button>
+											<button type="button" class="btn btn-default" id="btn-pendiente">PENDIENTE DE INFORMACION</button>
+											<button type="button" class="btn btn-default" id="btn-sistema">SISTEMA</button>
+										</div>
+									</div>
+									<div class="panel-footer"></div>
+								</div>
+								<div class="" id="div-devoluciones" style="position: relative;">
+									<div class="col-lg-3" id="dev1"></div>
+									<div class="col-lg-3" id="dev2"></div>
+									<div class="col-lg-3" id="dev3"></div>
+									<div class="col-lg-3" id="dev4"></div>
+									<div class="col-lg-3" id="dev5"></div>
+									<div class="col-lg-3" id="dev6"></div>
+									<div class="col-lg-3" id="dev7"></div>
+									<div class="col-lg-3" id="dev8"></div>
+								</div>
+								<div class="" id="div-rechazos" style="position: relative;">
+									<div class="col-lg-3" id="rechazo1"></div>
+									<div class="col-lg-3" id="rechazo2"></div>
+									<div class="col-lg-3" id="rechazo3"></div>
+									<div class="col-lg-3" id="rechazo4"></div>
+									<div class="col-lg-3" id="rechazo5"></div>
+									<div class="col-lg-3" id="rechazo6"></div>
+									<div class="col-lg-3" id="rechazo7"></div>
+									<div class="col-lg-3" id="rechazo8"></div>
+								</div>
+								<div class="" id="div-pendiente" style="position: relative;">
+									<div class="col-lg-3" id="pendiente1"></div>
+									<div class="col-lg-3" id="pendiente2"></div>
+									<div class="col-lg-3" id="pendiente3"></div>
+									<div class="col-lg-3" id="pendiente4"></div>
+									<div class="col-lg-3" id="pendiente5"></div>
+									<div class="col-lg-3" id="pendiente6"></div>
+									<div class="col-lg-3" id="pendiente7"></div>
+									<div class="col-lg-3" id="pendiente8"></div>
+								</div>
+								<div class="" id="div-sistema" style="position: relative;">
+									<div class="col-lg-3" id="sistema1"></div>
+									<div class="col-lg-3" id="sistema2"></div>
+									<div class="col-lg-3" id="sistema3"></div>
+									<div class="col-lg-3" id="sistema4"></div>
+									<div class="col-lg-3" id="sistema5"></div>
+									<div class="col-lg-3" id="sistema6"></div>
+									<div class="col-lg-3" id="sistema7"></div>
+									<div class="col-lg-3" id="sistema8"></div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<!-- /.Left col -->
+					<!-- right col (We are only adding the ID to make the widgets sortable)-->
+					<!-- right col -->
+				</div>
+				<!-- /.row (main row) -->
+			</section>
+			<!-- /.content -->
+		</div>
+		<!-- /.content-wrapper -->
+		<!-- /.FOOTER -->
+		<div th:replace="adminlte/footer"></div>
+	</div>
+	<!-- ./wrapper -->
+	<div th:replace="adminlte/script"></div>
+
+	<script th:inline="javascript">
+	
+/*<![CDATA[*/
+    var grafica = /*[[${grafica}]]*/ 'Sebastian';  
+    let actualDevolucionDivisional = /*[[${actualDevolucionDivisional}]]*/ 'Sebastian';  
+    let actualDevolucionRegional = /*[[${actualDevolucionRegional}]]*/ 'Sebastian'; 
+    let actualDevolucionAgente = /*[[${actualDevolucionAgente}]]*/ 'Sebastian'; 
+    let actualDevolucionAnalista = /*[[${actualDevolucionAnalista}]]*/ 'Sebastian';
+    let anteriorDevolucionDivisional = /*[[${anteriorDevolucionDivisional}]]*/ 'Sebastian';
+    let anteriorDevolucionRegional = /*[[${anteriorDevolucionRegional}]]*/ 'Sebastian';
+    let anteriorDevolucionAgente = /*[[${anteriorDevolucionAgente}]]*/ 'Sebastian';
+    let anteriorDevolucionAnalista =/*[[${anteriorDevolucionAnalista}]]*/ 'Sebastian';
+    console.log("array ",actualDevolucionDivisional);
+    let actualRechazoDivisional = /*[[${actualRechazoDivisional}]]*/ 'Sebastian';  
+    let actualRechazoRegional = /*[[${actualRechazoRegional}]]*/ 'Sebastian'; 
+    let actualRechazoAgente = /*[[${actualRechazoAgente}]]*/ 'Sebastian'; 
+    let actualRechazoAnalista = /*[[${actualRechazoAnalista}]]*/ 'Sebastian';
+    let anteriorRechazoDivisional = /*[[${anteriorRechazoDivisional}]]*/ 'Sebastian';
+    let anteriorRechazoRegional = /*[[${anteriorRechazoRegional}]]*/ 'Sebastian';
+    let anteriorRechazoAgente = /*[[${anteriorRechazoAgente}]]*/ 'Sebastian';
+    let anteriorRechazoAnalista =/*[[${anteriorRechazoAnalista}]]*/ 'Sebastian';
+    //pendiente
+    let actualPendienteDivisional = /*[[${actualPendienteDivisional}]]*/ 'Sebastian';  
+    let actualPendienteRegional = /*[[${actualPendienteRegional}]]*/ 'Sebastian'; 
+    let actualPendienteAgente = /*[[${actualPendienteAgente}]]*/ 'Sebastian'; 
+    let actualPendienteAnalista = /*[[${actualPendienteAnalista}]]*/ 'Sebastian';
+    let anteriorPendienteDivisional = /*[[${anteriorPendienteDivisional}]]*/ 'Sebastian';
+    let anteriorPendienteRegional = /*[[${anteriorPendienteRegional}]]*/ 'Sebastian';
+    let anteriorPendienteAgente = /*[[${anteriorPendienteAgente}]]*/ 'Sebastian';
+    let anteriorPendienteAnalista =/*[[${anteriorPendienteAnalista}]]*/ 'Sebastian';
+  //sistema
+    let actualSistemaDivisional = /*[[${actualSistemaDivisional}]]*/ 'Sebastian';  
+    let actualSistemaRegional = /*[[${actualSistemaRegional}]]*/ 'Sebastian'; 
+    let actualSistemaAgente = /*[[${actualSistemaAgente}]]*/ 'Sebastian'; 
+    let actualSistemaAnalista = /*[[${actualSistemaAnalista}]]*/ 'Sebastian';
+    let anteriorSistemaDivisional = /*[[${anteriorSistemaDivisional}]]*/ 'Sebastian';
+    let anteriorSistemaRegional = /*[[${anteriorSistemaRegional}]]*/ 'Sebastian';
+    let anteriorSistemaAgente = /*[[${anteriorSistemaAgente}]]*/ 'Sebastian';
+    let anteriorSistemaAnalista =/*[[${anteriorSistemaAnalista}]]*/ 'Sebastian';
+/*]]>*/
+		
+		$(function($) {
+			
+			$('#contenido').show();
+			
+			class chartPie{
+				constructor(series, title){
+					this.chart = {type : 'pie',options3d : {enabled : true,alpha : 45,beta : 0}};
+					this.title = title;//{text : 'Tiempo promedio por movimiento en minutos'};
+					this.tooltip = {pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'};
+					this.plotOptions ={pie : {allowPointSelect : true,cursor : 'pointer',depth : 35,dataLabels : {enabled : true,format : '{point.name}'
+					}}};
+					
+					this.series = series;
+				}
+			}
+			
+			let dev1Title = {"text" : ''};
+			let dev1Series =   [ {type : 'pie',name : 'cotizacion',data : actualDevolucionDivisional} ];
+			let dev1 = new chartPie(dev1Series , dev1Title);
+			console.log(dev1);
+			$('#dev1').highcharts(dev1,);/*highcharts*/
+			//
+			let dev2Title = {"text" : ''};
+			let dev2Series =  [ {type : 'pie',name : 'cotizacion',data : actualDevolucionRegional} ];
+			let dev2 = new chartPie(dev2Series , dev2Title);
+			console.log(dev2);
+			$('#dev2').highcharts(dev2,);/*highcharts*/
+			
+			//
+			let dev3Title = {"text" : ''};
+			let dev3Series =  [ {type : 'pie',name : 'cotizacion',data : actualDevolucionAgente} ];
+			let dev3 = new chartPie(dev3Series , dev3Title);
+			console.log(dev3);
+			$('#dev3').highcharts(dev3,);/*highcharts*/
+			//
+			let dev4Title = {"text" : ''};
+			let dev4Series =  [ {type : 'pie',name : 'cotizacion',data : actualDevolucionAnalista} ];
+			let dev4 = new chartPie(dev4Series , dev4Title);
+			console.log(dev4);
+			$('#dev4').highcharts(dev4,);/*highcharts*/
+			//5
+			let dev5Title = {"text" : ''};
+			let dev5Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorDevolucionDivisional} ];
+			let dev5 = new chartPie(dev5Series , dev5Title);
+			console.log(dev5);
+			$('#dev5').highcharts(dev5,);/*highcharts*/
+			
+			let dev6Title = {"text" : ''};
+			let dev6Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorDevolucionRegional} ];
+			let dev6 = new chartPie(dev6Series , dev6Title);
+			console.log(dev6);
+			$('#dev6').highcharts(dev6,);/*highcharts*/
+			
+			let dev7Title = {"text" : ''};
+			let dev7Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorDevolucionAgente} ];
+			let dev7 = new chartPie(dev7Series , dev7Title);
+			console.log(dev7);
+			$('#dev7').highcharts(dev7,);/*highcharts*/
+			
+			
+			let dev8Title = {"text" : ''};
+			let dev8Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorDevolucionAnalista} ];
+			let dev8 = new chartPie(dev8Series , dev8Title);
+			console.log(dev8);
+			$('#dev8').highcharts(dev8,);/*highcharts*/
+			
+			/*RECHAZO*/
+			
+			let re1Title = {"text" : ''};
+			let re1Series =   [ {type : 'pie',name : 'cotizacion',data : actualRechazoDivisional} ];
+			let re1 = new chartPie(re1Series , re1Title);
+			console.log(dev1);
+			$('#rechazo1').highcharts(re1,);/*highcharts*/
+			//
+			let re2Title = {"text" : ''};
+			let re2Series =  [ {type : 'pie',name : 'cotizacion',data : actualRechazoRegional} ];
+			let re2 = new chartPie(re2Series , re2Title);
+			console.log(re2);
+			$('#rechazo2').highcharts(re2,);/*highcharts*/
+			
+			//
+			let re3Title = {"text" : ''};
+			let re3Series =  [ {type : 'pie',name : 'cotizacion',data : actualRechazoAgente} ];
+			let re3 = new chartPie(re3Series , re3Title);
+			console.log(re3);
+			$('#rechazo3').highcharts(re3,);/*highcharts*/
+			//
+			let re4Title = {"text" : ''};
+			let re4Series =  [ {type : 'pie',name : 'cotizacion',data : actualRechazoAnalista} ];
+			let re4 = new chartPie(re4Series , re4Title);
+			console.log(re4);
+			$('#rechazo4').highcharts(re4,);/*highcharts*/
+			//5
+			let re5Title = {"text" : ''};
+			let re5Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorRechazoDivisional} ];
+			let re5 = new chartPie(re5Series , re5Title);
+			console.log(re5);
+			$('#rechazo5').highcharts(re5,);/*highcharts*/
+			
+			let re6Title = {"text" : ''};
+			let re6Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorRechazoRegional} ];
+			let re6 = new chartPie(re6Series , re6Title);
+			console.log(re6);
+			$('#rechazo6').highcharts(re6,);/*highcharts*/
+			
+			let re7Title = {"text" : ''};
+			let re7Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorRechazoAgente} ];
+			let re7 = new chartPie(re7Series , re7Title);
+			console.log(dev7);
+			$('#rechazo7').highcharts(re7,);/*highcharts*/
+			
+			
+			let re8Title = {"text" : ''};
+			let re8Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorRechazoAnalista} ];
+			let re8 = new chartPie(re8Series , re8Title);
+			console.log(re8);
+			$('#rechazo8').highcharts(re8,);/*highcharts*/
+			
+/*Pendiente*/
+			
+			let pendiente1Title = {"text" : ''};
+			let pendiente1Series =   [ {type : 'pie',name : 'cotizacion',data : actualPendienteDivisional} ];
+			let pendiente1 = new chartPie(pendiente1Series ,pendiente1Title);
+			console.log(pendiente1);
+			$('#pendiente1').highcharts(pendiente1,);/*highcharts*/
+			//
+			let pendiente2Title = {"text" : ''};
+			let pendiente2Series =  [ {type : 'pie',name : 'cotizacion',data : actualPendienteRegional} ];
+			let pendiente2 = new chartPie(pendiente2Series , pendiente2Title);
+			console.log(pendiente2);
+			$('#pendiente2').highcharts(pendiente2,);/*highcharts*/
+			
+			//
+			let pendiente3Title = {"text" : ''};
+			let pendiente3Series =  [ {type : 'pie',name : 'cotizacion',data : actualPendienteAgente} ];
+			let pendiente3 = new chartPie(pendiente3Series , pendiente3Title);
+			console.log(pendiente3);
+			$('#pendiente3').highcharts(pendiente3,);/*highcharts*/
+			//
+			let pendiente4Title = {"text" : ''};
+			let pendiente4Series =  [ {type : 'pie',name : 'cotizacion',data : actualPendienteAnalista} ];
+			let pendiente4 = new chartPie(pendiente4Series , pendiente4Title);
+			console.log(pendiente4);
+			$('#pendiente4').highcharts(pendiente4,);/*highcharts*/
+			//5
+			let pendiente5Title = {"text" : ''};
+			let pendiente5Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorPendienteDivisional} ];
+			let pendiente5 = new chartPie(pendiente5Series , pendiente5Title);
+			console.log(pendiente5);
+			$('#pendiente5').highcharts(pendiente5,);/*highcharts*/
+			
+			let pendiente6Title = {"text" : ''};
+			let pendiente6Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorPendienteRegional} ];
+			let pendiente6 = new chartPie(pendiente6Series , pendiente6Title);
+			console.log(pendiente6);
+			$('#pendiente6').highcharts(pendiente6,);/*highcharts*/
+			
+			let pendiente7Title = {"text" : ''};
+			let pendiente7Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorPendienteAgente} ];
+			let pendiente7 = new chartPie(pendiente7Series , pendiente7Title);
+			console.log(pendiente7);
+			$('#pendiente7').highcharts(pendiente7,);/*highcharts*/
+			
+			
+			let pendiente8Title = {"text" : ''};
+			let pendiente8Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorPendienteAnalista} ];
+			let pendiente8 = new chartPie(pendiente8Series , pendiente8Title);
+			console.log(pendiente8);
+			$('#pendiente8').highcharts(pendiente8,);/*highcharts*/
+			
+/*Sistema*/
+			
+			let sistema1Title = {"text" : ''};
+			let sistema1Series =   [ {type : 'pie',name : 'cotizacion',data : actualSistemaDivisional} ];
+			let sistema1 = new chartPie(sistema1Series ,sistema1Title);
+			console.log(sistema1);
+			$('#sistema1').highcharts(sistema1,);/*highcharts*/
+			//
+			let sistema2Title = {"text" : ''};
+			let sistema2Series =  [ {type : 'pie',name : 'cotizacion',data : actualSistemaRegional} ];
+			let sistema2 = new chartPie(sistema2Series , sistema2Title);
+			console.log(sistema2);
+			$('#sistema2').highcharts(sistema2,);/*highcharts*/
+			
+			//
+			let sistema3Title = {"text" : ''};
+			let sistema3Series =  [ {type : 'pie',name : 'cotizacion',data : actualSistemaAgente} ];
+			let sistema3 = new chartPie(sistema3Series , sistema3Title);
+			console.log(sistema3);
+			$('#sistema3').highcharts(sistema3,);/*highcharts*/
+			//
+			let sistema4Title = {"text" : ''};
+			let sistema4Series =  [ {type : 'pie',name : 'cotizacion',data : actualSistemaAnalista} ];
+			let sistema4 = new chartPie(sistema4Series , sistema4Title);
+			console.log(sistema4);
+			$('#sistema4').highcharts(sistema4,);/*highcharts*/
+			//5
+			let sistema5Title = {"text" : ''};
+			let sistema5Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorSistemaDivisional} ];
+			let sistema5 = new chartPie(sistema5Series , sistema5Title);
+			console.log(sistema5);
+			$('#sistema5').highcharts(sistema5,);/*highcharts*/
+			
+			let sistema6Title = {"text" : ''};
+			let sistema6Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorSistemaRegional} ];
+			let sistema6 = new chartPie(sistema6Series , sistema6Title);
+			console.log(sistema6);
+			$('#sistema6').highcharts(sistema6,);/*highcharts*/
+			
+			let sistema7Title = {"text" : ''};
+			let sistema7Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorSistemaAgente} ];
+			let sistema7 = new chartPie(sistema7Series , sistema7Title);
+			console.log(sistema7);
+			$('#sistema7').highcharts(sistema7,);/*highcharts*/
+			
+			
+			let sistema8Title = {"text" : ''};
+			let sistema8Series =  [ {type : 'pie',name : 'cotizacion',data : anteriorSistemaAnalista} ];
+			let sistema8 = new chartPie(sistema8Series , sistema8Title);
+			console.log(sistema8);
+			$('#sistema8').highcharts(sistema8,);/*highcharts*/
+			
+			
+			});
+
+	</script>
+	<script th:src="@{cotizacion/woae.js}"></script>
+	<script th:src="@{cotizacion/validDate.js}"></script>
+
+
+</body>
+</html>
