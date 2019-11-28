@@ -49,6 +49,9 @@ public class XxmpfBpmIndEmision {
 	@Column(name="COD_SECTOR")
 	private Integer codSector;
 	
+	@Column(name="SECTOR")
+	private String sector;
+		
 	@Column(name="CVE_DIVISIONAL")
 	private Integer cveDivisional;
 	
@@ -108,17 +111,17 @@ public class XxmpfBpmIndEmision {
 	@Column(name="TIEMPO_T_FOLIO")
 	private Integer tiempoTFolio;
 	
+	@Column(name="TIEMPO_DIAS")
+	private Integer tiempoDias;
+	
 	@Column(name="ERROR_CAPTURA")
 	private Integer errorCaptura;
 	
-	@Column(name="TIEMPO_DIAS")
-	private Integer tiempoDias;
+	
 	
 	@Column(name="TIPO_ERROR_CAPTURA")
 	private String tipoErrorCaptura;
 	
-	@Column(name="SECTOR")
-	private String sector;
 	
 	public XxmpfBpmIndEmision() {
 		

@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,7 @@ import com.example.demo.bussine.ChartNFA;
 import com.example.demo.model.ChartBarraModel;
 import com.example.demo.model.DateModel;
 import com.example.demo.model.DetalleCotizacionModel;
+import com.example.demo.pdf.NFAPdf;
 import com.example.demo.xls.NFAReport;
 
 @Controller
@@ -36,6 +38,9 @@ public class IndicadorNFAController {
 
 	@Autowired
 	private NFAReport report;
+	
+	@Autowired
+	private NFAPdf pdfReport;
 
 	@GetMapping("/indicador_nfa")
 	public String index(Model model) {
@@ -83,5 +88,24 @@ public class IndicadorNFAController {
 		headers.add("Content-Disposition", "attachment; filename=Num Folios Atendidos.xls");
 
 		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(in));
+	}
+	
+	@PostMapping("/download/nfa.pdf")
+	public ResponseEntity<InputStreamResource> CreatePdfReport(@ModelAttribute("datesmodel") DateModel datesmodel)
+			throws IOException {
+		String dateStart = datesmodel.getDateStart();
+		String dateFinish = datesmodel.getDateFinish();
+		System.out.println("entro reques2 xls-> " + dateStart + " final " + dateFinish);
+		ByteArrayInputStream in = pdfReport.create(datesmodel,chartNfa.drawChart(dateStart, dateFinish));
+		// return IOUtils.toByteArray(in);
+		System.out.println("entro reques2 pdf-> " + in);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "attachment; filename=foliosrecibidos.pdf");
+		headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        headers.add("Pragma", "no-cache");
+        headers.add("Expires", "0");
+
+		return ResponseEntity.ok().headers(headers).contentType(MediaType.APPLICATION_PDF).body(new InputStreamResource(in));
 	}
 }

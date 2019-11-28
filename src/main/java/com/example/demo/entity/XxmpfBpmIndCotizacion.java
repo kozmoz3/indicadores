@@ -10,6 +10,7 @@ import javax.persistence.*;
 public class XxmpfBpmIndCotizacion {
 	
     @Id
+    @GeneratedValue
     @Column(name="ID_COTIZACION")
 	private Integer idCotizacion;
     

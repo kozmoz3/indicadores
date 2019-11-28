@@ -1,8 +1,12 @@
 package com.example.demo.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
@@ -12,11 +16,13 @@ import javax.persistence.Table;
 public class XxmpfBpmIndCotDetalle {
 
 	@Id
+	@GeneratedValue
     @Column(name="ID_COTIZACION_DETALLE")
 	private Integer idCotizacion;
 	
 	@ManyToOne
 	@MapsId("ID_COTIZACION")
+	@JoinColumn(name = "ID_COTIZACION", insertable = false, updatable = false)
 	private XxmpfBpmIndCotizacion idCotizacionFK;
 	
 
@@ -66,6 +72,7 @@ public class XxmpfBpmIndCotDetalle {
 		super();
 	}
 
+	
 	public XxmpfBpmIndCotDetalle(Integer idCotizacion, XxmpfBpmIndCotizacion idCotizacionFK, String area,
 			String actividad, String estatus, String motivo, String usuarioAnalista, String nombreanalista,
 			String usuarioSuscriptor, String nombreSuscriptor, String usuarioEmisor, String nombreEmisor,

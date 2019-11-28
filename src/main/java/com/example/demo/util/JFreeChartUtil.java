@@ -12,7 +12,7 @@ public class JFreeChartUtil {
 		return ChartFactory.createPieChart(title, dataSet, true, true, false);
 	}
 	
-	public  static  JFreeChart generateBarChart(CategoryDataset dataSet, String title,String CategoriesAxis,String valueAxis) {
+	public  static  JFreeChart generateBarChartHorizontal(CategoryDataset dataSet, String title,String CategoriesAxis,String valueAxis) {
 		return ChartFactory.createBarChart(title,
 				                           CategoriesAxis,
 				                           valueAxis, 

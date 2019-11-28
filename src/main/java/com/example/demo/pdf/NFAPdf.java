@@ -18,13 +18,12 @@ import com.example.demo.util.PdfUtil;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
-public class NFRPdf {
+public class NFAPdf {
 
-	private static final Logger logger = LogManager.getLogger(NFRPdf.class);
+	private static final Logger logger = LogManager.getLogger(NFAPdf.class);
 	
 	public ByteArrayInputStream create(DateModel datesmodel,List<ChartBarraModel> listGrafica) {
 		PdfWriter writer = null;
@@ -34,7 +33,8 @@ public class NFRPdf {
 		try {
 			writer = PdfWriter.getInstance(document, out);
 			document.open();
-			PdfUtil.addHeader(writer, "Reporte de Numero de folios recibidos", "fecha: "+datesmodel.getDateStart()+" al "+datesmodel.getDateFinish());
+			PdfUtil.addHeader(writer, "Reporte de Numero de folios atendidos", "fecha: "+datesmodel.getDateStart()+" al "+datesmodel.getDateFinish());
+			
 			BufferedImage bufferedImage = getGrafica(listGrafica).createBufferedImage(500, 300);
 			 Image image = Image.getInstance(bufferedImage, null);
 			 document.add(image);
@@ -53,6 +53,6 @@ public class NFRPdf {
 	    	dataset.addValue(listGrafica.get(i).getData()[0],listGrafica.get(i).getName(),"");
 	    }
 	    
-	    return JFreeChartUtil.generateBarChartHorizontal(dataset, "Numero de Folios Recibidos", "", "");
+	    return JFreeChartUtil.generateBarChartHorizontal(dataset, "Numero de Folios Atendidos", "", "");
 	}
 }
