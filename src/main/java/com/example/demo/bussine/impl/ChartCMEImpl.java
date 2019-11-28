@@ -11,18 +11,13 @@ import com.example.demo.service.TPMService;
 @Service
 public class ChartCMEImpl implements ChartCME{
 
-	@Override
-	public List<String> getSectores() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	/*@Autowired
+	@Autowired
 	TPMService service;
 	
 	@Override
 	public List<String> getSectores(){
 		return service.sectores();
-	}*/
+	}
 	
 }
