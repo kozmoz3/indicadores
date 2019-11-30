@@ -32,9 +32,9 @@ private static final Logger logger = LogManager.getLogger(NMRPdf.class);
 		try {
 			writer = PdfWriter.getInstance(document, out);
 			document.open();
-			PdfUtil.addHeader(writer, "Reporte de Numero de folios atendidos", "fecha: "+datesmodel.getDateStart()+" al "+datesmodel.getDateFinish());
+			PdfUtil.addHeader(writer, "Reporte de Numero de Movimentos realizados", "fecha: "+datesmodel.getDateStart()+" al "+datesmodel.getDateFinish());
 			
-			BufferedImage bufferedImage = JFreeChartUtil.simpleBarChartHorizontalByChartBarraModel(listGrafica, "Numero de folios atendidos", "", "").createBufferedImage(500, 300);
+			BufferedImage bufferedImage = JFreeChartUtil.simpleBarChartByListChartColumModel(listGrafica, "Numero de Movimentos realizados", "", "").createBufferedImage(500, 300);
 			 Image image = Image.getInstance(bufferedImage, null);
 			 document.add(image);
 			document.close();

@@ -28,6 +28,11 @@
 							<!-- Tabs within a box -->
 							<div th:replace="adminlte/nav-tabswrapper"></div>
 							<div class="tab-content no-padding">
+							<div class="alert alert-info" role="alert">
+									<span class="glyphicon glyphicon-stats"
+										aria-hidden="true"></span> <span class="sr-only">Grafica</span>
+									Grafica de Numero de movimientos realizados
+								</div>
 								<form id="yourForm" th:action="@{/indicador_nmr_show}"
 									th:object="${datesmodel}" method="post">
 									<div th:replace="componentes/dates"></div>
@@ -44,6 +49,11 @@
 												<button type="Submit" class="btn btn-success">
 													Descargar archivo</button>
 											</form>
+											<br></br>
+											<form  th:action="@{/download/nmr.pdf}"
+									th:object="${datesmodel}" method="post">
+								<div th:replace="componentes/dateshidden"></div>
+								</form>
 										</div>
 										<div class="panel-footer"></div>
 									</div>

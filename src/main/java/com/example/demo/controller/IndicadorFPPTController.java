@@ -21,7 +21,7 @@ import com.example.demo.xls.FPPTReport;
 public class IndicadorFPPTController {
 
 	@Autowired
-	ChartFPPT chart;
+	private ChartFPPT chart;
 	
 	@Autowired
 	FPPTReport report;

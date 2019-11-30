@@ -14,6 +14,7 @@ import org.jfree.data.general.DefaultPieDataset;
 
 import com.example.demo.model.ChartBarraModel;
 import com.example.demo.model.ChartBarraPorcentajeModel;
+import com.example.demo.model.ChartColumModel;
 import com.example.demo.model.ChartModel;
 import com.example.demo.model.DateModel;
 import com.example.demo.pdf.NSEPdf;
@@ -21,6 +22,30 @@ import com.example.demo.pdf.NSEPdf;
 public class JFreeChartUtil {
 	
 	private static final Logger logger = LogManager.getLogger(JFreeChartUtil.class);
+	
+	public  static  JFreeChart simpleBarChartByListChartColumModel(List<ChartColumModel> listGrafica, String title,String CategoriesAxis,String valueAxis) {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		   for(int i = 0; i<listGrafica.size(); i++) {
+			   List<String>listCategoria = listGrafica.get(i).getCategorias();
+			   List<Integer>listData =listGrafica.get(i).getData();
+			   for(int j = 0; j < listCategoria.size(); j++) {
+				   dataset.setValue(listData.get(j),listCategoria.get(j),"");
+			    }
+		    }
+		    
+		    return generateBarChartVertical(dataset, title,CategoriesAxis,valueAxis);
+		
+	}
+	
+	public  static  JFreeChart generateBarChartVertical(CategoryDataset dataSet, String title,String CategoriesAxis,String valueAxis) {
+		return ChartFactory.createBarChart(title,
+				                           CategoriesAxis,
+				                           valueAxis, 
+				                           dataSet,
+				                           PlotOrientation.VERTICAL,
+				                           true, true, false);
+		
+	}
 	
 	public static  JFreeChart simplePieChartByListChartModel(List<ChartModel> listGrafica,String title) {
 		DefaultPieDataset dataSet = new DefaultPieDataset();
