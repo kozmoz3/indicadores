@@ -80,7 +80,7 @@ public class IndicadorNFAController {
 			throws IOException {
 		String dateStart = datesmodel.getDateStart();
 		String dateFinish = datesmodel.getDateFinish();
-		System.out.println("entro reques2 xls-> " + dateStart + " final " + dateFinish);
+		logger.info("entro reques2 xls-> " + dateStart + " final " + dateFinish);
 		ByteArrayInputStream in = report.create(datesmodel);
 		// return IOUtils.toByteArray(in);
 
@@ -98,10 +98,10 @@ public class IndicadorNFAController {
 		System.out.println("entro reques2 xls-> " + dateStart + " final " + dateFinish);
 		ByteArrayInputStream in = pdfReport.create(datesmodel,chartNfa.drawChart(dateStart, dateFinish));
 		// return IOUtils.toByteArray(in);
-		System.out.println("entro reques2 pdf-> " + in);
+		logger.info("entro reques2 pdf-> " + in);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Disposition", "attachment; filename=foliosrecibidos.pdf");
+		headers.add("Content-Disposition", "attachment; filename=Num_Folios_Atendidos.pdf");
 		headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");

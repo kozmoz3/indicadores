@@ -7,11 +7,10 @@ import java.util.List;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.ChartBarraModel;
+import com.example.demo.model.ChartModel;
 import com.example.demo.model.DateModel;
 import com.example.demo.util.JFreeChartUtil;
 import com.example.demo.util.PdfUtil;
@@ -21,11 +20,11 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
-public class NFAPdf {
+public class PFPPdf {
 
-	private static final Logger logger = LogManager.getLogger(NFAPdf.class);
+private static final Logger logger = LogManager.getLogger(PFPPdf.class);
 	
-	public ByteArrayInputStream create(DateModel datesmodel,List<ChartBarraModel> listGrafica) {
+	public ByteArrayInputStream create(List<ChartModel> listGrafica) {
 		PdfWriter writer = null;
 		Document document = new Document(PageSize.A4, 36, 36, 90, 36);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -33,9 +32,9 @@ public class NFAPdf {
 		try {
 			writer = PdfWriter.getInstance(document, out);
 			document.open();
-			PdfUtil.addHeader(writer, "Reporte de Numero de folios atendidos", "fecha: "+datesmodel.getDateStart()+" al "+datesmodel.getDateFinish());
+			PdfUtil.addHeader(writer, "Reporte de Promedio de folios pendientes", "");
 			
-			BufferedImage bufferedImage = JFreeChartUtil.simpleBarChartHorizontalByChartBarraModel(listGrafica, "Numero de folios atendidos", "", "").createBufferedImage(500, 300);
+			BufferedImage bufferedImage = JFreeChartUtil.simplePieChartByListChartModel(listGrafica, "Numero de folios pendientes").createBufferedImage(500, 300);
 			 Image image = Image.getInstance(bufferedImage, null);
 			 document.add(image);
 			document.close();
@@ -45,6 +44,5 @@ public class NFAPdf {
 		
 		return new ByteArrayInputStream(out.toByteArray());
 	}
-	
 	
 }

@@ -7,11 +7,10 @@ import java.util.List;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.category.DefaultCategoryDataset;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.ChartBarraModel;
+import com.example.demo.model.ChartColumModel;
 import com.example.demo.model.DateModel;
 import com.example.demo.util.JFreeChartUtil;
 import com.example.demo.util.PdfUtil;
@@ -21,11 +20,11 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
-public class NFAPdf {
+public class NMRPdf {
 
-	private static final Logger logger = LogManager.getLogger(NFAPdf.class);
+private static final Logger logger = LogManager.getLogger(NMRPdf.class);
 	
-	public ByteArrayInputStream create(DateModel datesmodel,List<ChartBarraModel> listGrafica) {
+	public ByteArrayInputStream create(DateModel datesmodel,List<ChartColumModel> listGrafica) {
 		PdfWriter writer = null;
 		Document document = new Document(PageSize.A4, 36, 36, 90, 36);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -45,6 +44,5 @@ public class NFAPdf {
 		
 		return new ByteArrayInputStream(out.toByteArray());
 	}
-	
 	
 }
