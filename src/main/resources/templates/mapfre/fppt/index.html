@@ -28,9 +28,19 @@
 							<!-- Tabs within a box -->
 							<div th:replace="adminlte/nav-tabswrapper"></div>
 							<div class="tab-content no-padding">
+							<div class="alert alert-info" role="alert">
+									<span class="glyphicon glyphicon-stats"
+										aria-hidden="true"></span> <span class="sr-only">Grafica</span>
+									Grafica de Numero de folios atendidos
+								</div>
 								<div class="" id="btn-grafica" style="po height: 5px;">
 								<form th:action="@{/download/foliospendientesxtipo.xlsx}" method="post">
 								<button type="submit">Descargar Archivo</button>
+								</form>
+								<br></br>
+								<form  th:action="@{/download/fppt.pdf}"
+									th:object="${datesmodel}" method="post">
+								<div th:replace="componentes/dateshidden"></div>
 								</form>
 									
 								</div>
