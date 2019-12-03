@@ -62,6 +62,18 @@ public class JFreeChartUtil {
 		return ChartFactory.createPieChart(title, dataSet, true, true, false);
 	}
 	
+	
+	public static JFreeChart barChartHorizontalByChartBarraPorcentajeModel(ChartBarraPorcentajeModel grafica, String title,String CategoriesAxis,String valueAxis) {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		List<String> categoria =grafica.getCategoria();
+		List<BigDecimal> data = grafica.getData();
+	    for(int j = 0; j<categoria.size(); j++) {
+	    	
+	    	dataset.addValue(data.get(j),categoria.get(j),"");
+	    }
+	    return generateBarChartHorizontal(dataset, title,CategoriesAxis,valueAxis);
+	}
+	    
 	public static JFreeChart barChartHorizontalByListChartBarraPorcentajeModel(List<ChartBarraPorcentajeModel> listGrafica, String title,String CategoriesAxis,String valueAxis) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		

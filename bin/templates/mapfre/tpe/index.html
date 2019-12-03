@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <div th:replace="adminlte/head"></div>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
@@ -27,10 +28,22 @@
 							<!-- Tabs within a box -->
 							<div th:replace="adminlte/nav-tabswrapper"></div>
 							<div class="tab-content no-padding">
-								
-						<div class="" id="grafica" style="position: relative; height: 500px;"></div>
-								
-									</div>
+								<div class="alert alert-info" role="alert">
+									<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+									<span class="sr-only">Grafica</span> Grafica de Tiempo promedio
+									de las tareas realizadas por emisores
+								</div>
+								<form th:action="@{/download/tpe.pdf}" method="post">
+									<button id="buscar" type="submit" class="btn-primary">
+										<i class="glyphicon glyphicon-cloud-download"></i>Descargar
+										PDF
+									</button>
+								</form>
+
+								<div class="" id="grafica"
+									style="position: relative; height: 500px;"></div>
+
+							</div>
 						</div>
 					</section>
 					<!-- /.Left col -->
@@ -49,41 +62,50 @@
 	<div th:replace="adminlte/script"></div>
 
 	<script th:inline="javascript">
-	
-/*<![CDATA[*/
-    var grafica = /*[[${grafica}]]*/ 'Sebastian';  
-/*]]>*/
-		console.log('graficas ',grafica.data)
+		/*<![CDATA[*/
+		var grafica = /*[[${grafica}]]*/'Sebastian';
+		/*]]>*/
+		console.log('graficas ', grafica.data)
 		$(function($) {
-			
+
 			$('#contenido').show();
-			
+
 			$('#grafica').highcharts({
-		    	chart : {type : 'bar',options3d : {enabled : true,alpha : 45,beta : 0}},
-				title : {text : 'Tiempo Promedio de Emisión en Minutos'},
-				xAxis: {
-		            categories: grafica.categoria
-		        },
-		        yAxis: {
-		            title: {
-		                text: 'Sectores'
-		            }
-		        },
-				tooltip : {pointFormat : '{series.name}:'},
-										series : [ {
-											name : '',
-											data : grafica.data
-										} ]
+				chart : {
+					type : 'bar',
+					options3d : {
+						enabled : true,
+						alpha : 45,
+						beta : 0
+					}
+				},
+				title : {
+					text : 'Tiempo Promedio de Emisión en Minutos'
+				},
+				xAxis : {
+					categories : grafica.categoria
+				},
+				yAxis : {
+					title : {
+						text : 'Sectores'
+					}
+				},
+				tooltip : {
+					pointFormat : '{series.name}:'
+				},
+				series : [ {
+					name : '',
+					data : grafica.data
+				} ]
 
-									});/*highcharts*/
-												
+			});/*highcharts*/
+
 			//
-	
-			});
 
+		});
 	</script>
-<script th:src="@{cotizacion/cotizacion.js}"></script>
-<script th:src="@{cotizacion/validDate.js}"></script>
+	<script th:src="@{cotizacion/cotizacion.js}"></script>
+	<script th:src="@{cotizacion/validDate.js}"></script>
 
 
 </body>
