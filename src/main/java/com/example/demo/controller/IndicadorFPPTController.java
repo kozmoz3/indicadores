@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.bussine.ChartFPPT;
 import com.example.demo.model.DateModel;
+import com.example.demo.pdf.FPPTPdf;
 import com.example.demo.pdf.PFPPdf;
 import com.example.demo.xls.FPPTReport;
 
@@ -33,7 +34,7 @@ public class IndicadorFPPTController {
 	private FPPTReport report;
 	
 	@Autowired
-	private  PFPPdf pdfReport;
+	private  FPPTPdf pdfReport;
 
 	@GetMapping("/indicador_fppt")
 	public String index(Model model) {
@@ -61,7 +62,7 @@ public class IndicadorFPPTController {
 		logger.info("entro reques2 pdf-> " + in);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Disposition", "attachment; filename=Num_Folios_Atendidos.pdf");
+		headers.add("Content-Disposition", "attachment; filename=Folios_pendientes_por_tipo.pdf");
 		headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
 		headers.add("Pragma", "no-cache");
 		headers.add("Expires", "0");

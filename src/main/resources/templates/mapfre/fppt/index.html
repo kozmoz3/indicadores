@@ -28,21 +28,24 @@
 							<!-- Tabs within a box -->
 							<div th:replace="adminlte/nav-tabswrapper"></div>
 							<div class="tab-content no-padding">
-							<div class="alert alert-info" role="alert">
-									<span class="glyphicon glyphicon-stats"
-										aria-hidden="true"></span> <span class="sr-only">Grafica</span>
-									Grafica de Numero de folios atendidos
+								<div class="alert alert-info" role="alert">
+									<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+									<span class="sr-only">Grafica</span> Grafica Folios pendientes por tipo de solicitud
 								</div>
 								<div class="" id="btn-grafica" style="po height: 5px;">
-								<form th:action="@{/download/foliospendientesxtipo.xlsx}" method="post">
-								<button type="submit">Descargar Archivo</button>
-								</form>
-								<br></br>
-								<form  th:action="@{/download/fppt.pdf}"
-									th:object="${datesmodel}" method="post">
-								<div th:replace="componentes/dateshidden"></div>
-								</form>
-									
+									<form th:action="@{/download/foliospendientesxtipo.xlsx}"
+										method="post">
+										<button type="submit">Descargar Archivo</button>
+									</form>
+									<br></br>
+									<form th:action="@{/download/fppt.pdf}"
+										th:object="${datesmodel}" method="post">
+										<button id="buscar" type="submit" class="btn-primary">
+											<i class="glyphicon glyphicon-cloud-download"></i>Descargar
+											PDF
+										</button>
+									</form>
+
 								</div>
 								<div class="" id="grafica"
 									style="position: relative; height: 500px;"></div>
@@ -85,7 +88,7 @@
 					}
 				},
 				title : {
-					text : 'Numero de Folios Recibidos'
+					text : 'Folios pendientes por tipo de solicitud'
 				},
 				xAxis : {
 					categories : categoria

@@ -56,17 +56,25 @@ public class XxmpfBpmIndEmiDetalle {
 	@Column(name="FECHA_INICIO")
 	private String fechaInicio;
 	
+	@Column(name="FECHA_INICIO_ATENCION")
+	private String fechaInicioAtencion;
+	
 	@Column(name="FECHA_FIN")
 	private String fechaFin;
 	
 	@Column(name="TIEMPO_ACTIVIDAD")
 	private Integer tiempoActividad;
 	
+	@Column(name="TIEMPO_DIAS")
+	private Integer tiempoDias;
+	
+	@Column(name="TIEMPO_ATENCION")
+	private Integer tiempoAtencion;
+	
 	@Column(name="ACTIVIDAD_ATIEMPO")
 	private Integer actividadATiempo;
 	
-	@Column(name="TIEMPO_ATENCION")
-	private Integer tiempoAtencion; 
+	 
 	
 	
 	
@@ -273,6 +281,22 @@ public class XxmpfBpmIndEmiDetalle {
 
 	public void setActividadATiempo(Integer actividadATiempo) {
 		this.actividadATiempo = actividadATiempo;
+	}
+
+	public String getFechaInicioAtencion() {
+		return fechaInicioAtencion;
+	}
+
+	public void setFechaInicioAtencion(String fechaInicioAtencion) {
+		this.fechaInicioAtencion = fechaInicioAtencion;
+	}
+
+	public Integer getTiempoDias() {
+		return tiempoDias;
+	}
+
+	public void setTiempoDias(Integer tiempoDias) {
+		this.tiempoDias = tiempoDias;
 	}
 	
 	

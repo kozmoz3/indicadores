@@ -78,6 +78,19 @@ public class JFreeChartUtil {
 	    return generateBarChartHorizontal(dataset, title,CategoriesAxis,valueAxis);
 	}
 	
+	public static JFreeChart simpleBarChartHorizontalByListChartColumModel(List<ChartColumModel> listGrafica, String title,String CategoriesAxis,String valueAxis) {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		   for(int i = 0; i<listGrafica.size(); i++) {
+			   List<String>listCategoria = listGrafica.get(i).getCategorias();
+			   List<Integer>listData =listGrafica.get(i).getData();
+			   for(int j = 0; j < listCategoria.size(); j++) {
+				   dataset.setValue(listData.get(j),listCategoria.get(j),"");
+			    }
+		    }
+	    
+	    return generateBarChartHorizontal(dataset, title,CategoriesAxis,valueAxis);
+	}
+	
 	public static JFreeChart simpleBarChartHorizontalByChartBarraModel(List<ChartBarraModel> listGrafica, String title,String CategoriesAxis,String valueAxis) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		

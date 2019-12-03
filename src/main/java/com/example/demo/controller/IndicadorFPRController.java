@@ -40,9 +40,11 @@ public class IndicadorFPRController {
 		return "mapfre/fpr/index";
 	}
 	
+	
 	@PostMapping("/indicador_fpr_show")
 	public String show(Model model, @Valid DateModel datemodel, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
+			logger.error("Method: Show param invalid");
 			return "redirect:/indicador_fpr";
 		}
 

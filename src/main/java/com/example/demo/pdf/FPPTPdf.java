@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.model.ChartBarraModel;
 import com.example.demo.model.ChartColumModel;
-import com.example.demo.model.ChartModel;
 import com.example.demo.model.DateModel;
 import com.example.demo.util.JFreeChartUtil;
 import com.example.demo.util.PdfUtil;
@@ -21,11 +20,11 @@ import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
-public class PFPPdf {
+public class FPPTPdf {
 
-private static final Logger logger = LogManager.getLogger(PFPPdf.class);
+private static final Logger logger = LogManager.getLogger(NFAPdf.class);
 	
-	public ByteArrayInputStream create(List<ChartModel> listGrafica) {
+	public ByteArrayInputStream create(List<ChartColumModel> listGrafica) {
 		PdfWriter writer = null;
 		Document document = new Document(PageSize.A4, 36, 36, 90, 36);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -33,9 +32,9 @@ private static final Logger logger = LogManager.getLogger(PFPPdf.class);
 		try {
 			writer = PdfWriter.getInstance(document, out);
 			document.open();
-			PdfUtil.addHeader(writer, "Reporte de Promedio de folios pendientes", "");
+			PdfUtil.addHeader(writer, "Reporte de Folios pendientes por tipo de solicitud", "");
 			
-			BufferedImage bufferedImage = JFreeChartUtil.simplePieChartByListChartModel(listGrafica, "Promedio de folios pendientes").createBufferedImage(500, 300);
+			BufferedImage bufferedImage = JFreeChartUtil.simpleBarChartHorizontalByListChartColumModel(listGrafica, "Folios pendientes por tipo de solicitud", "", "").createBufferedImage(500, 300);
 			 Image image = Image.getInstance(bufferedImage, null);
 			 document.add(image);
 			document.close();
