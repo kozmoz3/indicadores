@@ -1,17 +1,31 @@
 
 package com.example.demo.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.bussine.WOADevolucion;
+import com.example.demo.model.DateModel;
 
 
 @Controller
 public class WOAEController {
+	
+	private static final Logger logger = LogManager.getLogger(WOAEController.class);
 	
 	@Autowired
 	@Qualifier("devolucion")
@@ -64,4 +78,6 @@ public class WOAEController {
 		model.addAttribute("anteriorSistemaAnalista",service.mesAnteriorAnalista("nombreanalista","Sistemas"));
 		return "mapfre/woae/index";
 	}
+	
+	
 }

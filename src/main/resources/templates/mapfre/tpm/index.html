@@ -28,7 +28,18 @@
 							<!-- Tabs within a box -->
 							<div th:replace="adminlte/nav-tabswrapper"></div>
 							<div class="tab-content no-padding">
-
+								<div class="alert alert-info" role="alert">
+									<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+									<span class="sr-only">Grafica</span> Grafica de Tiempo promedio
+									realizado por los emisores
+								</div>
+								<form th:action="@{/download/tpm.pdf}" th:object="${datesmodel}"
+									method="post">
+									<button id="buscar" type="submit" class="btn-primary">
+										<i class="glyphicon glyphicon-cloud-download"></i>Descargar
+										PDF
+									</button>
+								</form>
 								<div class="" id="grafica"
 									style="position: relative; height: 500px;"></div>
 

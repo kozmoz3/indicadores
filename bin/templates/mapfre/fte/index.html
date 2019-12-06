@@ -28,26 +28,35 @@
 							<!-- Tabs within a box -->
 							<div th:replace="adminlte/nav-tabswrapper"></div>
 							<div class="tab-content no-padding">
+								<div class="alert alert-info" role="alert">
+									<span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+									<span class="sr-only">Grafica</span> Grafica de Efectividad FTE
+								</div>
 								<div class="panel panel-primarys">
-									<div class="panel-body">
-										
+									<div class="panel-body"></div>
+									<div class="panel-footer">
+									<form id="yourForm" th:action="@{/download/fte.pdf}"  method="post">
+										<button id="buscar" type="submit" class="btn-primary">
+											<i class="glyphicon glyphicon-cloud-download"></i>Descargar
+											PDF
+										</button>
+										</form>
 									</div>
-									<div class="panel-footer"></div>
 								</div>
 								<div class="" id="div-devoluciones" style="position: relative;">
-									<div class="col-lg-3" id="dev1"><button type="button" class="btn btn-default"
-												id="btn-dev">DEVOLUCION</button></div>
+									<div class="col-lg-3" id="dev1"></div>
 									<div class="col-lg-3" id="dev2"></div>
 									<div class="col-lg-3" id="dev3"></div>
 									<div class="col-lg-3" id="dev4"></div>
+
 									<div class="col-lg-3" id="dev5"></div>
 									<div class="col-lg-3" id="dev6"></div>
 									<div class="col-lg-3" id="dev7"></div>
 									<div class="col-lg-3" id="dev8"></div>
 								</div>
-								
-								
-								
+
+
+
 							</div>
 						</div>
 					</section>
@@ -86,26 +95,47 @@
 			
 			$('#contenido').show();
 			
-			class chart{
+			class chartBar{
 				constructor(series, title, xAxis){
-					//this.chart = {type : 'column',options3d : {enabled : true,alpha : 45,beta : 0}};
+					//this.chart = {type : 'column'};
 					this.xAxis = xAxis;
 					this.title = title;//{text : 'Tiempo promedio por movimiento en minutos'};
-					this.tooltip = {pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'};
-					/*this.plotOptions ={pie : {allowPointSelect : true,cursor : 'pointer',depth : 35,dataLabels : {enabled : true,format : '{point.name}'
-					}}};*/
+					
 					
 					this.series = series;
 				}
 			}
-			console.log("chart 1 ",MothCurrentAutos)
-			console.log("categories ",MothCurrentAutos[0].categories)
-			let dev1Title = {"text" : 'Autos'};
-			let dev1Series =   [MothCurrentAutos];
-			let dev1xAxis = MothCurrentAutos[0].categories;
-			let dev1 = new chart(dev1Series , dev1Title,dev1xAxis);
-			console.log(dev1);
-			$('#dev1').highcharts(dev1,);/*
+			
+			m("#dev1","Autos",MothCurrentAutos);
+			m("#dev2","AyE",MothCurrentAyE);
+			m("#dev3","Autos",MothCurrentDanos);
+			m("#dev4","AyE",MothCurrentVida);
+			
+			m("#dev5","Autos",MothPreviousAutos);
+			m("#dev6","AyE",MothPreviousAyE);
+			m("#dev7","Autos",MothPreviousDanos);
+			m("#dev8","AyE",MothPreviousVida);
+			
+			function m(idContainer,title,MothCurrent){
+				let series = [];
+				
+				for(var a in MothCurrent){
+				
+				let ser = {type:MothCurrent[a].type,
+						   name:MothCurrent[a].name,
+						   data:MothCurrent[a].data}
+				series[a]=ser
+				}
+				
+				let dev1Title = {"text" : title};
+				let dev1Series =   series;
+				let dev1xAxis = {categories:MothCurrentAutos[0].categories};
+				let dev1 = new chartBar(dev1Series , dev1Title,dev1xAxis);
+				console.log("function chart -> ",dev1);
+				$(idContainer).highcharts(dev1,);	
+			}
+			
+			/*
 			//
 			let dev2Title = {"text" : ''};
 			let dev2Series =  [ {type : 'pie',name : 'cotizacion',data : actualDevolucionRegional} ];
