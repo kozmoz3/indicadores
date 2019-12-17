@@ -12,10 +12,12 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.stereotype.Service;
 
 import com.example.demo.util.StringUtil;
 import com.example.demo.util.xls.CellStyleUtil;
 
+@Service
 public class CMEReport {
 	
 	private static final Logger logger = LogManager.getLogger(CMEReport.class);

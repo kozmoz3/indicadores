@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.example.demo.bussine.ChartCME;
 import com.example.demo.model.CMEModel;
 import com.example.demo.model.DateModel;
+import com.example.demo.xls.CMEReport;
 
 @Controller
 public class IndicadorCMEController {
@@ -27,6 +28,9 @@ public class IndicadorCMEController {
 
 	@Autowired
 	private ChartCME service;
+	
+	@Autowired
+	private CMEReport report;
 	
 	@GetMapping("/indicador_cme")
 	public String index(Model model) {
@@ -55,16 +59,27 @@ public class IndicadorCMEController {
 	}
 	
 	@PostMapping("/download/cme_foliosPendientes.xlsx")
-	public ResponseEntity<InputStreamResource> excelCustomersReport(@ModelAttribute("datesmodel") DateModel datesmodel)
+	public ResponseEntity<InputStreamResource> excelCustomersReport(@ModelAttribute("model") CMEModel datesmodel)
 			throws IOException {
-		String dateStart = datesmodel.getDateStart();
-		String dateFinish = datesmodel.getDateFinish();
-		logger.info("entro reques2 xls-> " + dateStart + " final " + dateFinish);
-		ByteArrayInputStream in =null;// report.create(datesmodel);
+		
+		ByteArrayInputStream in = report.create(service.excelFoliosPendientes(datesmodel.getSector(), datesmodel.getPeriodo()));
 		// return IOUtils.toByteArray(in);
 
 		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Disposition", "attachment; filename=Num Folios Atendidos.xls");
+		headers.add("Content-Disposition", "attachment; filename=CME_Folios_Pendiente.xls");
+
+		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(in));
+	}
+	
+	@PostMapping("/download/cme_folioscomplit.xlsx")
+	public ResponseEntity<InputStreamResource> excelFoliosComplit(@ModelAttribute("model") CMEModel datesmodel)
+			throws IOException {
+		
+		ByteArrayInputStream in = report.create(service.excelComplit(datesmodel.getSector(), datesmodel.getPeriodo()));
+		// return IOUtils.toByteArray(in);
+
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Content-Disposition", "attachment; filename=CME_Folios_Completos.xls");
 
 		return ResponseEntity.ok().headers(headers).body(new InputStreamResource(in));
 	}

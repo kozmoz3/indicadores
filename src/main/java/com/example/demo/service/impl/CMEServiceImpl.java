@@ -147,16 +147,27 @@ public class CMEServiceImpl implements CMEService {
 		String dateComplit = "01/" + fecha;
 		String prevDate = DateUtil.minusMonths(dateComplit, 1);
 
-		List<Object[]> results = entityManager.createQuery(" SELECT emision.folio," + " detalle.idEmiDetalle,"
-				+ " CASE gen.tipo_solicitud WHEN 'ENDOSO' THEN 'Endosos'" + "      ELSE 'Pólizas y renovaciones'"
-				+ "      END AS TIPO_SOLUCITUD," + " detalle.area," + " detalle.actividad," + " emision.divisional,"
-				+ " emision.regional," + " emision.oficinaComercial," + " detalle.usuarioAnalista,"
-				+ " detalle.usuarioEmisor," + " detalle.nombreEmisor," + " detalle.usuarioSuscriptor,"
-				+ " detalle.nombreSuscriptor," + " emision.FechaInicio," + " emision.tiempoDias"
-				+ " FROM XxmpfBpmIndEmiDetalle detalle, XxmpfBpmIndEmision emision"
-				+ " WHERE emision.idEmision = detalle.idEmisionFK  AND" + " detalle.estatus = 'Pendiente' AND"
-				+ " emision.sector = '" + sector + "' AND" + " detalle.fechaInicio BETWEEN TO_DATE('" + prevDate
-				+ "', 'DD/MM/YY') AND TO_DATE('" + dateComplit + "', 'DD/MM/YY')" + " GROUP BY 1,2").getResultList();
+		List<Object[]> results = entityManager.createQuery(" SELECT emision.folio,"
+		                                                          + " detalle.idEmiDetalle,"
+				                                                  + " CASE emision.tipoSolicitud WHEN 'ENDOSO' THEN 'Endosos'" 
+		                                                          + "      ELSE 'Pólizas y renovaciones'"
+				                                                  + "      END AS TIPO_SOLUCITUD," + " detalle.area," + " detalle.actividad," + " emision.divisional,"
+				                                                  + " emision.regional,"
+				                                                  + " emision.oficinaComercial,"
+				                                                  + " detalle.usuarioAnalista,"
+				                                                  + " detalle.usuarioEmisor," 
+				                                                  + " detalle.nombreEmisor," 
+				                                                  + " detalle.usuarioSuscriptor,"
+				                                                  + " detalle.nombreSuscriptor,"
+				                                                  + " emision.fechaInicio,"
+				                                                  + " emision.tiempoDias"
+				                                            + " FROM XxmpfBpmIndEmiDetalle detalle, XxmpfBpmIndEmision emision"
+				                                            + " WHERE emision.idEmision = detalle.idEmisionFK  AND"
+				                                                    + " detalle.estatus = 'Pendiente' AND"
+				                                                    + " emision.sector = '" 
+				                                                    + sector + "' AND"
+				                                                    + " detalle.fechaInicio BETWEEN TO_DATE('" + prevDate+ "', 'DD/MM/YY') AND TO_DATE('" + dateComplit + "', 'DD/MM/YY')" 
+				                                                    + " GROUP BY 1,2").getResultList();
 
 		for (Object[] emision : results) {
 			logger.info("Method: excelFoliosPendientes add[ Folio = " + emision[0].toString() + ", Tipo de solicitud = "
@@ -172,16 +183,27 @@ public class CMEServiceImpl implements CMEService {
 		String dateComplit = "01/" + fecha;
 		String prevDate = DateUtil.minusMonths(dateComplit, 1);
 
-		List<Object[]> results = entityManager.createQuery(" SELECT emision.folio," + " detalle.idEmiDetalle,"
-				+ " CASE gen.tipo_solicitud WHEN 'ENDOSO' THEN 'Endosos'" + "      ELSE 'Pólizas y renovaciones'"
-				+ "      END AS TIPO_SOLUCITUD," + " detalle.area," + " detalle.actividad," + " emision.divisional,"
-				+ " emision.regional," + " emision.oficinaComercial," + " detalle.usuarioAnalista,"
-				+ " detalle.usuarioEmisor," + " detalle.nombreEmisor," + " detalle.usuarioSuscriptor,"
-				+ " detalle.nombreSuscriptor," + " emision.FechaInicio," + " emision.tiempoDias"
-				+ " FROM XxmpfBpmIndEmiDetalle detalle, XxmpfBpmIndEmision emision"
-				+ " WHERE emision.idEmision = detalle.idEmisionFK  AND" + " detalle.estatus != 'Pendiente' AND"
-				+ " emision.sector = '" + sector + "' AND" + " detalle.fechaInicio BETWEEN TO_DATE('" + prevDate
-				+ "', 'DD/MM/YY') AND TO_DATE('" + dateComplit + "', 'DD/MM/YY')" + " GROUP BY 1,2").getResultList();
+		List<Object[]> results = entityManager.createQuery(" SELECT emision.folio,"
+                + " detalle.idEmiDetalle,"
+                + " CASE emision.tipoSolicitud WHEN 'ENDOSO' THEN 'Endosos'" 
+                + "      ELSE 'Pólizas y renovaciones'"
+                + "      END AS TIPO_SOLUCITUD," + " detalle.area," + " detalle.actividad," + " emision.divisional,"
+                + " emision.regional,"
+                + " emision.oficinaComercial,"
+                + " detalle.usuarioAnalista,"
+                + " detalle.usuarioEmisor," 
+                + " detalle.nombreEmisor," 
+                + " detalle.usuarioSuscriptor,"
+                + " detalle.nombreSuscriptor,"
+                + " emision.fechaInicio,"
+                + " emision.tiempoDias"
+          + " FROM XxmpfBpmIndEmiDetalle detalle, XxmpfBpmIndEmision emision"
+          + " WHERE emision.idEmision = detalle.idEmisionFK  AND"
+                  + " detalle.estatus != 'Pendiente' AND"
+                  + " emision.sector = '" 
+                  + sector + "' AND"
+                  + " detalle.fechaInicio BETWEEN TO_DATE('" + prevDate+ "', 'DD/MM/YY') AND TO_DATE('" + dateComplit + "', 'DD/MM/YY')" 
+                  + " GROUP BY 1,2").getResultList();
 
 		for (Object[] emision : results) {
 			logger.info("Method: excelFoliosPendientes add[ Folio = " + emision[0].toString() + ", Tipo de solicitud = "
