@@ -20,6 +20,7 @@ public class ChartFPPTImpl implements ChartFPPT{
 	public List<ChartColumModel> create() {
 		List<String> listSector = service.listSector();
 		List<Object[]>listEmision = service.allByEstatus();
+		
 		List<ChartColumModel>listChart  = new ArrayList<ChartColumModel>();
 		List<Integer>data = new ArrayList<Integer>();
 		

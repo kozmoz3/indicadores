@@ -31,7 +31,7 @@
 						<div class="nav-tabs-custom">
 							<!-- Tabs within a box -->
 							<div th:replace="adminlte/nav-tabswrapper"></div>
-							<div class="tab-content no-padding">
+							<div class="tab-content no-padding" style="position: relative;">
 								<form id="yourForm" th:action="@{/indicador_cme}"
 									th:object="${model}" method="post">
 									<div th:replace="mapfre/cme/form"></div>

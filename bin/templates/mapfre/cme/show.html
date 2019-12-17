@@ -2,10 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <div th:replace="adminlte/head"></div>
 <style>
-    .ui-datepicker-calendar {
-        display: none;
-    }
-    </style>
+.ui-datepicker-calendar {
+	display: none;
+}
+</style>
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="wrapper">
 		<!-- HEADERS -->
@@ -31,13 +31,64 @@
 						<div class="nav-tabs-custom">
 							<!-- Tabs within a box -->
 							<div th:replace="adminlte/nav-tabswrapper"></div>
+
 							<div class="tab-content no-padding" style="position: relative;">
 								<form id="yourForm" th:action="@{/indicador_cme}"
 									th:object="${model}" method="post">
 									<div th:replace="mapfre/cme/form"></div>
-									
+
 								</form>
+								<div class="container">
+									<div class="row">
+										<div class="col-lg-3">
+											<form th:action="@{/download/cme_foliosPendientes.xlsx}"
+												th:object="${model}" method="post">
+												<div th:replace="mapfre/cme/excelform"></div>
+												<button id="buscar" type="submit" class="btn-primary">
+													<i class="glyphicon glyphicon-cloud-download"></i>Descargar
+													Folios Pendientes
+												</button>
+
+											</form>
+										</div>
+										<div class="col-lg-3">
+											<form th:action="@{/download/cme_foliosPendientes.xlsx}"
+												th:object="${model}" method="post">
+												<div th:replace="mapfre/cme/excelform"></div>
+												<button id="buscar" type="submit" class="btn-primary">
+													<i class="glyphicon glyphicon-cloud-download"></i>Descargar
+													Folios Completos
+												</button>
+
+											</form>
+										</div>
+									</div>
+								
+								<div class="col-lg-6" id="dev1">
+
+									<th:block th:if="${color == 'verde'}">
+                                               verde
+										entro
+
+										</th:block>
+									<th:block th:if="${color == 'azul'}">
+                                               azul
+										
+
+										</th:block>
+									<th:block th:if="${color == 'rojo'}">
+                                               rojo
+										
+
+										</th:block>
+								</div>
+								<div class="col-lg-6" id="dev2"></div>
+								<div class="col-lg-6" id="dev1"></div>
+								<div class="col-lg-6" id="dev2"></div>
+								</div>
+
 							</div>
+
 						</div>
 					</section>
 					<!-- /.Left col -->

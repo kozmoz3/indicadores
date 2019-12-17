@@ -15,6 +15,7 @@ import org.jfree.data.general.DefaultPieDataset;
 import com.example.demo.model.ChartBarraModel;
 import com.example.demo.model.ChartBarraPorcentajeModel;
 import com.example.demo.model.ChartColumModel;
+import com.example.demo.model.ChartCombinationModel;
 import com.example.demo.model.ChartModel;
 import com.example.demo.model.DateModel;
 import com.example.demo.pdf.NSEPdf;
@@ -23,6 +24,22 @@ public class JFreeChartUtil {
 	
 	private static final Logger logger = LogManager.getLogger(JFreeChartUtil.class);
 	
+	public  static  JFreeChart verticalBarChartByListChartCombinationModel(List<ChartCombinationModel> listGrafica, String title,String CategoriesAxis,String valueAxis) {
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		logger.info("Method: verticalBarChartByListChartCombinationModel size = "+listGrafica.size());
+		   for(int i = 0; i<listGrafica.size(); i++) {
+			   List<String>listCategoria = listGrafica.get(i).getCategories();
+			   List<Integer>listData =listGrafica.get(i).getData();
+			   logger.info("Method: verticalBarChartByListChartCombinationModel listdata size = "+listData.size()+"categoriesm size = "+listCategoria.size()+", name= "+listGrafica.get(i).getName()+", type= "+listGrafica.get(i).getType());
+			   for(int j = 0; j < listCategoria.size(); j++) {
+				   dataset.setValue(listData.get(j),listCategoria.get(j),"");
+				   logger.info("Method: verticalBarChartByListChartCombinationModel add [data = "+listData.get(j)+", categoria = "+listCategoria.get(j));
+			    }
+		    }
+		      
+		    return generateBarChartVertical(dataset, title,CategoriesAxis,valueAxis);
+		
+	}
 	public  static  JFreeChart simpleBarChartByListChartColumModel(List<ChartColumModel> listGrafica, String title,String CategoriesAxis,String valueAxis) {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		   for(int i = 0; i<listGrafica.size(); i++) {

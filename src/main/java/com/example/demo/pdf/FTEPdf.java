@@ -18,6 +18,9 @@ import com.example.demo.util.PdfUtil;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.PageSize;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 @Service
@@ -36,19 +39,90 @@ public class FTEPdf {
 		try {
 			writer = PdfWriter.getInstance(document, out);
 			document.open();
-			PdfUtil.addHeader(writer, "Reporte de Numero de folios atendidos", " ");
-
-			BufferedImage bufferedImage = JFreeChartUtil
-					.simpleBarChartHorizontalByChartBarraModel(listGrafica, "Numero de folios atendidos", "", "")
-					.createBufferedImage(500, 300);
-			Image image = Image.getInstance(bufferedImage, null);
-			document.add(image);
+			PdfUtil.addHeader(writer, "Reporte de Efectividad por FTP", " ");
+			document.add(new Paragraph("Graficas del Mes Actual \n \r"));
+			document.add(new Paragraph(""));
+			document.add(chartMonthCurrent());
+			document.add(new Paragraph("Graficas del Mes Anterior \n \r"));
+			document.add(chartMonthPrevious());
 			document.close();
 		} catch (Exception e) {
 			logger.error("Method create error -- " + e);
 		}
 
 		return new ByteArrayInputStream(out.toByteArray());
+	}
+
+	private PdfPTable chartMonthCurrent() {
+		PdfPTable table = new PdfPTable(2);
+		try {
+			table.setWidths(new int[] { 15, 15, });
+			table.setTotalWidth(527);
+			BufferedImage bufferedImageAutos = JFreeChartUtil
+					.verticalBarChartByListChartCombinationModel(service.createMothCurrent("Autos"),
+							"Autos", "", "")
+					.createBufferedImage(500, 300);
+			Image imageAutos = Image.getInstance(bufferedImageAutos, null);
+			table.addCell(imageAutos);
+			BufferedImage bufferedImageAyE = JFreeChartUtil
+					.verticalBarChartByListChartCombinationModel(service.createMothCurrent("AyE"),
+							"AyE", "", "")
+					.createBufferedImage(500, 300);
+			Image imageAyE = Image.getInstance(bufferedImageAyE, null);
+			table.addCell(imageAyE);
+			BufferedImage bufferedImageDaños = JFreeChartUtil
+					.verticalBarChartByListChartCombinationModel(service.createMothCurrent("Daños"),
+							"Daños", "", "")
+					.createBufferedImage(500, 300);
+			Image imageDaños = Image.getInstance(bufferedImageDaños, null);
+			table.addCell(imageDaños);
+			BufferedImage bufferedImageVida = JFreeChartUtil
+					.verticalBarChartByListChartCombinationModel(service.createMothCurrent("Vida"),
+							"Vida", "", "")
+					.createBufferedImage(500, 300);
+			Image imageVida = Image.getInstance(bufferedImageVida, null);
+			table.addCell(imageVida);
+			
+		} catch (Exception e) {
+			logger.error("Method getEstatuse error -- " + e);
+		}
+		return table;
+	}
+	
+	private PdfPTable chartMonthPrevious() {
+		PdfPTable table = new PdfPTable(2);
+		try {
+			table.setWidths(new int[] { 15, 15, });
+			table.setTotalWidth(527);
+			BufferedImage bufferedImageAutos = JFreeChartUtil
+					.verticalBarChartByListChartCombinationModel(service.createMothPrevious("Autos"),
+							"Autos", "", "")
+					.createBufferedImage(500, 300);
+			Image imageAutos = Image.getInstance(bufferedImageAutos, null);
+			table.addCell(imageAutos);
+			BufferedImage bufferedImageAyE = JFreeChartUtil
+					.verticalBarChartByListChartCombinationModel(service.createMothPrevious("AyE"),
+							"AyE", "", "")
+					.createBufferedImage(500, 300);
+			Image imageAyE = Image.getInstance(bufferedImageAyE, null);
+			table.addCell(imageAyE);
+			BufferedImage bufferedImageDaños = JFreeChartUtil
+					.verticalBarChartByListChartCombinationModel(service.createMothPrevious("Daños"),
+							"Daños", "", "")
+					.createBufferedImage(500, 300);
+			Image imageDaños = Image.getInstance(bufferedImageDaños, null);
+			table.addCell(imageDaños);
+			BufferedImage bufferedImageVida = JFreeChartUtil
+					.verticalBarChartByListChartCombinationModel(service.createMothPrevious("Vida"),
+							"Vida", "", "")
+					.createBufferedImage(500, 300);
+			Image imageVida = Image.getInstance(bufferedImageVida, null);
+			table.addCell(imageVida);
+			
+		} catch (Exception e) {
+			logger.error("Method getEstatuse error -- " + e);
+		}
+		return table;
 	}
 
 }

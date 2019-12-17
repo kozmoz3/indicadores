@@ -1,6 +1,6 @@
   $(function() {
             $('#date-pickers').datepicker( {
-            	format: "mm-yyyy",
+            	format: "mm/yy",
                 startView: "months", 
                 minViewMode: "months"
             });
