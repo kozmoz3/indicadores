@@ -1,5 +1,6 @@
 package com.example.demo.bussine.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.LogManager;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.bussine.ChartCME;
 import com.example.demo.controller.IndicadorNFAController;
+import com.example.demo.model.EndosoPoliza;
 import com.example.demo.repository.CMERepository;
 import com.example.demo.service.CMEService;
 import com.example.demo.service.TPMService;
@@ -66,6 +68,24 @@ public class ChartCMEImpl implements ChartCME{
 	@Override
 	public List<Object[]> excelComplit(String sector, String fecha){
 		return service.excelComplit(sector, fecha);
+	}
+	
+	@Override
+	public List<EndosoPoliza> EndososPolizas(String sector, String fecha){
+		List<Object[]> listResults = service.getPolizasAndEndosos(sector, fecha);
+		List<EndosoPoliza> listEndosos = new ArrayList<EndosoPoliza>();
+		
+		if(listResults.size() == 0) {
+			listEndosos.add(new EndosoPoliza(0, ""));
+		}
+		for (Object[] emision : listResults) {
+			int count = Integer.parseInt(emision[0].toString());
+			String solicitud = emision[1].toString();
+			listEndosos.add(new EndosoPoliza(count, solicitud));
+			logger.info("Method: EndososPolizas add[ Count = " + count + ", Solicitud= "+ solicitud );
+
+		}
+		return listEndosos;
 	}
 	
 }

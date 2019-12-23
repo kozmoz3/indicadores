@@ -53,14 +53,23 @@ public class CotizacionPdf {
 			writer = PdfWriter.getInstance(document, out);
 			document.open();
 			PdfUtil.addHeader(writer, "Reporte de Cotizacion", "fecha: "+datesmodel.getDateStart()+" al "+datesmodel.getDateFinish());
-			document.add(new Paragraph("Estatus."));
-			document.add(getEstatus(datesmodel));
-			document.add(new Paragraph("Retrabajo."));
+			document.add(new Paragraph("Estatus. \n \r"));
+			document.add(getTableEstatus(datesmodel));
+			BufferedImage bufferedImage = getGrafica(datesmodel).createBufferedImage(500, 300);
+			 Image image = Image.getInstance(bufferedImage, null);
+			 document.add(image);
+			//document.add(getEstatus(datesmodel));
+			document.add(new Paragraph("Retrabajo. \n \r"));
 			document.add(getTableRetrabajo(datesmodel));
-			document.add(new Paragraph("Tiempos."));
+			document.add(new Paragraph("Tiempos. \n \r"));
 			document.add(getTableTiempos(datesmodel));
-			document.add(new Paragraph("Motivos."));
-			document.add(getTableMotivos(datesmodel));
+			document.add(new Paragraph("Motivos. \n \r"));
+			document.add(getTableCancelacion(datesmodel));
+			document.add(new Paragraph("\n \r"));
+			document.add(getTableRechazo(datesmodel));
+			document.add(new Paragraph(" \n \r"));
+			document.add(getTableNoAceptado(datesmodel));
+			
 			document.close();
 		}catch(Exception e) {
 			logger.error("Method create error -- "+e);
@@ -77,8 +86,12 @@ public class CotizacionPdf {
 			table.addCell(getTableCancelacion(datesmodel));
 			table.addCell(getTableRechazo(datesmodel));
 			table.addCell(getTableNoAceptado(datesmodel));
+			
+			getTableCancelacion(datesmodel);
+			getTableRechazo(datesmodel);
+			getTableNoAceptado(datesmodel);
 		}catch(Exception e) {
-			logger.error("Method getEstatuse error -- "+e);
+			logger.error("Method getTableMotivos error -- "+e);
 		}
 		return table;
 	}
@@ -86,7 +99,7 @@ public class CotizacionPdf {
 	private  PdfPTable getTableNoAceptado(DateModel datesmodel){
 		PdfPTable table = new PdfPTable(3);
 		try {
-			table.setWidths(new int[]{10, 10});
+			table.setWidths(new int[]{10, 10, 10});
 			table.setTotalWidth(527);
 			PdfPCell hcell;
 			 Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
@@ -102,7 +115,8 @@ public class CotizacionPdf {
            hcell.setHorizontalAlignment(Element.ALIGN_CENTER);
            table.addCell(hcell);
            List<CotizacionModel> tableMotivo = cotizacion.drawTableNoAceptado(datesmodel.getDateStart(), datesmodel.getDateFinish(),"No ");
-			for(CotizacionModel motivo : tableMotivo) {
+           logger.info("Method: getTableMotivos size = "+ tableMotivo.size());
+           for(CotizacionModel motivo : tableMotivo) {
 				PdfPCell cell;
 
                 cell = new PdfPCell(new Phrase(motivo.getEstatus()));
@@ -121,7 +135,7 @@ public class CotizacionPdf {
                 table.addCell(cell);
 			}
 		}catch(Exception e) {
-			logger.error("Method getEstatuse error -- "+e);
+			logger.error("Method getTableNoAceptado error -- "+e);
 		}
 		return table;
 	}
@@ -129,7 +143,7 @@ public class CotizacionPdf {
 	private  PdfPTable getTableRechazo(DateModel datesmodel){
 		PdfPTable table = new PdfPTable(3);
 		try {
-			table.setWidths(new int[]{10, 10});
+			table.setWidths(new int[]{10, 10,10});
 			table.setTotalWidth(527);
 			PdfPCell hcell;
 			 Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
@@ -164,7 +178,7 @@ public class CotizacionPdf {
                 table.addCell(cell);
 			}
 		}catch(Exception e) {
-			logger.error("Method getEstatuse error -- "+e);
+			logger.error("Method getTableRechazo error -- "+e);
 		}
 		return table;
 	}
@@ -172,7 +186,7 @@ public class CotizacionPdf {
 	private  PdfPTable getTableCancelacion(DateModel datesmodel){
 		PdfPTable table = new PdfPTable(3);
 		try {
-			table.setWidths(new int[]{10, 10});
+			table.setWidths(new int[]{10, 10,10});
 			table.setTotalWidth(527);
 			PdfPCell hcell;
 			 Font headFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD);
@@ -191,6 +205,7 @@ public class CotizacionPdf {
 			for(CotizacionModel motivo : tableMotivo) {
 				PdfPCell cell;
 
+				logger.info("Method: getTableCancelacion add [ estatus = "+motivo.getEstatus()+", num folios = "+motivo.getNumFolios()+",porcentaje = "+motivo.getPorcentaje());
                 cell = new PdfPCell(new Phrase(motivo.getEstatus()));
                 cell.setVerticalAlignment(Element.ALIGN_MIDDLE);
                 cell.setHorizontalAlignment(Element.ALIGN_CENTER);
@@ -207,7 +222,7 @@ public class CotizacionPdf {
                 table.addCell(cell);
 			}
 		}catch(Exception e) {
-			logger.error("Method getEstatuse error -- "+e);
+			logger.error("Method getTableCancelacion error -- "+e);
 		}
 		return table;
 	}
@@ -221,7 +236,7 @@ public class CotizacionPdf {
 			table.addCell(getTableProceso(datesmodel));
 			table.addCell(getTableArea(datesmodel));
 		}catch(Exception e) {
-			logger.error("Method getEstatuse error -- "+e);
+			logger.error("Method getTableTiempos error -- "+e);
 		}
 		return table;
 	}
@@ -256,7 +271,7 @@ public class CotizacionPdf {
                 table.addCell(cell);
 			}
 		}catch(Exception e) {
-			logger.error("Method getEstatuse error -- "+e);
+			logger.error("Method getTableArea error -- "+e);
 		}
 		return table;
 	}
@@ -291,7 +306,7 @@ public class CotizacionPdf {
                 table.addCell(cell);
 			
 		}catch(Exception e) {
-			logger.error("Method getEstatuse error -- "+e);
+			logger.error("Method getTableProceso error -- "+e);
 		}
 		return table;
 	}
@@ -326,7 +341,7 @@ public class CotizacionPdf {
                 table.addCell(cell);
 			}
 		}catch(Exception e) {
-			logger.error("Method getEstatuse error -- "+e);
+			logger.error("Method getTableRetrabajo error -- "+e);
 		}
 		return table;
 	}

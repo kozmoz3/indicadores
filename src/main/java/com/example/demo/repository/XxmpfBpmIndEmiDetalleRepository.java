@@ -12,7 +12,7 @@ import com.example.demo.entity.XxmpfBpmIndEmiDetalle;
 @Repository
 public interface XxmpfBpmIndEmiDetalleRepository extends JpaRepository<XxmpfBpmIndEmiDetalle, String>{
 	
-	@Query("SELECT AVG(detalle.tiempoActividad) FROM XxmpfBpmIndEmiDetalle detalle,XxmpfBpmIndEmision emision WHERE emision.idEmision = detalle.idEmisionFK AND detalle.estatus = 'emitido' AND emision.sector = :sector")
+	@Query("SELECT AVG(detalle.tiempoActividad) FROM XxmpfBpmIndEmiDetalle detalle,XxmpfBpmIndEmision emision WHERE emision.idEmision = detalle.idEmisionFK AND detalle.estatus = 'Emitido' AND emision.sector = :sector")
 	public BigDecimal AvgTiempoActividadBySector(@Param("sector") String sector);
 	
 	
